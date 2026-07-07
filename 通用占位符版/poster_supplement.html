@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=750, initial-scale=1.0">
+<title>各类组织关系转入指引 - 2026届管理培训生</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    width: 750px;
+    margin: 0 auto;
+    min-height: 100vh;
+    background: linear-gradient(180deg, #0D1B2A 0%, #1B2838 100%);
+    font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", sans-serif;
+    color: #FFFFFF;
+    padding: 0 32px 60px 32px;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* ========== 顶部区域 ========== */
+  .header {
+    width: 100%;
+    height: 250px;
+    background: linear-gradient(135deg, #1A73E8 0%, #00BFA5 100%);
+    border-radius: 0 0 32px 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    margin-left: -32px;
+    margin-right: -32px;
+    margin-bottom: 24px;
+    padding: 0 32px;
+  }
+
+  .header .geo-deco {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.15;
+  }
+
+  .header .geo-circle-1 {
+    width: 120px;
+    height: 120px;
+    border: 3px solid #fff;
+    top: -30px;
+    right: -20px;
+  }
+
+  .header .geo-circle-2 {
+    width: 80px;
+    height: 80px;
+    background: #fff;
+    bottom: 30px;
+    left: -15px;
+    opacity: 0.1;
+  }
+
+  .header .geo-circle-3 {
+    width: 40px;
+    height: 40px;
+    border: 2px solid #fff;
+    top: 60px;
+    left: 60px;
+  }
+
+  .header .geo-circle-4 {
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    top: 140px;
+    right: 80px;
+    opacity: 0.2;
+  }
+
+  .header .geo-circle-5 {
+    width: 60px;
+    height: 60px;
+    border: 2px solid #fff;
+    bottom: -10px;
+    right: 100px;
+    opacity: 0.12;
+  }
+
+  .header .geo-line-1 {
+    position: absolute;
+    width: 150px;
+    height: 2px;
+    background: #fff;
+    opacity: 0.1;
+    top: 40px;
+    left: 100px;
+    transform: rotate(-15deg);
+  }
+
+  .header .geo-line-2 {
+    position: absolute;
+    width: 100px;
+    height: 2px;
+    background: #fff;
+    opacity: 0.1;
+    bottom: 60px;
+    right: 40px;
+    transform: rotate(20deg);
+  }
+
+  .header .geo-dots {
+    position: absolute;
+    display: flex;
+    gap: 12px;
+    bottom: 20px;
+    right: 40px;
+    opacity: 0.15;
+  }
+
+  .header .geo-dots span {
+    width: 6px;
+    height: 6px;
+    background: #fff;
+    border-radius: 50%;
+  }
+
+  .header .geo-dots2 {
+    position: absolute;
+    display: flex;
+    gap: 10px;
+    top: 30px;
+    left: 30px;
+    opacity: 0.12;
+  }
+
+  .header .geo-dots2 span {
+    width: 5px;
+    height: 5px;
+    background: #fff;
+    border-radius: 50%;
+  }
+
+  .header h1 {
+    font-size: 42px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    position: relative;
+    z-index: 1;
+    text-align: center;
+  }
+
+  .header .subtitle {
+    font-size: 22px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.9);
+    margin-top: 16px;
+    letter-spacing: 2px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ========== 通用卡片 ========== */
+  .card {
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .card-title {
+    display: flex;
+    align-items: center;
+    font-size: 26px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    padding-left: 18px;
+    position: relative;
+  }
+
+  .card-title::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 2px;
+    bottom: 2px;
+    width: 5px;
+    border-radius: 3px;
+    background: linear-gradient(180deg, #1A73E8, #00BFA5);
+  }
+
+  .card-title .icon {
+    margin-right: 10px;
+    font-size: 28px;
+  }
+
+  .info-row {
+    display: flex;
+    margin-bottom: 14px;
+    line-height: 1.7;
+  }
+
+  .info-label {
+    flex-shrink: 0;
+    color: rgba(255,255,255,0.55);
+    font-size: 22px;
+    min-width: 120px;
+  }
+
+  .info-value {
+    font-size: 22px;
+    color: #FFFFFF;
+    word-break: break-all;
+  }
+
+  .info-note {
+    font-size: 20px;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.7;
+    margin-top: 8px;
+    padding-left: 4px;
+  }
+
+  /* ========== 党组织关系转入 - 子卡片 ========== */
+  .sub-card {
+    background: rgba(255,255,255,0.05);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 16px;
+    border-left: 4px solid #00BFA5;
+    position: relative;
+  }
+
+  .sub-card:last-child {
+    margin-bottom: 0;
+  }
+
+  .sub-card.tag-green {
+    border-left-color: #00BFA5;
+  }
+
+  .sub-card.tag-blue {
+    border-left-color: #1A73E8;
+  }
+
+  .sub-card.tag-orange {
+    border-left-color: #FF9800;
+  }
+
+  .sub-tag {
+    display: inline-block;
+    font-size: 20px;
+    font-weight: 600;
+    padding: 4px 14px;
+    border-radius: 6px;
+    margin-bottom: 14px;
+  }
+
+  .tag-green .sub-tag {
+    background: rgba(0,191,165,0.2);
+    color: #69F0AE;
+  }
+
+  .tag-blue .sub-tag {
+    background: rgba(26,115,232,0.2);
+    color: #4FC3F7;
+  }
+
+  .tag-orange .sub-tag {
+    background: rgba(255,152,0,0.2);
+    color: #FFB74D;
+  }
+
+  .sub-section-title {
+    font-size: 20px;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 6px;
+  }
+
+  .sub-section-value {
+    font-size: 22px;
+    color: #FFFFFF;
+    line-height: 1.7;
+    margin-bottom: 12px;
+    word-break: break-all;
+  }
+
+  .sub-section-value:last-child {
+    margin-bottom: 0;
+  }
+
+  .step-list {
+    list-style: none;
+    padding: 0;
+    counter-reset: none;
+  }
+
+  .step-list li {
+    font-size: 21px;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.8;
+    padding-left: 8px;
+    margin-bottom: 4px;
+    word-break: break-all;
+  }
+
+  .highlight-text {
+    color: #4FC3F7;
+    font-weight: 500;
+  }
+
+  .highlight-text-green {
+    color: #69F0AE;
+    font-weight: 500;
+  }
+
+  .highlight-text-orange {
+    color: #FFB74D;
+    font-weight: 500;
+  }
+
+  /* ========== 温馨提示 ========== */
+  .tip-box {
+    background: rgba(255,193,7,0.15);
+    border-radius: 8px;
+    padding: 18px 20px;
+    margin-top: 18px;
+    border-left: 4px solid #FFC107;
+    position: relative;
+  }
+
+  .tip-box .tip-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #FFC107;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .tip-box p {
+    font-size: 20px;
+    color: rgba(255,255,255,0.8);
+    line-height: 1.7;
+    margin-bottom: 6px;
+  }
+
+  .tip-box p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* ========== 重要提醒卡片 ========== */
+  .card.alert-card {
+    border: 1px solid rgba(255,152,0,0.3);
+    background: rgba(255,152,0,0.06);
+  }
+
+  .card.alert-card .card-title::before {
+    background: linear-gradient(180deg, #FF9800, #FFC107);
+  }
+
+  .alert-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 16px;
+    line-height: 1.7;
+  }
+
+  .alert-item:last-child {
+    margin-bottom: 0;
+  }
+
+  .alert-bullet {
+    flex-shrink: 0;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #FF9800;
+    margin-top: 14px;
+    margin-right: 14px;
+  }
+
+  .alert-text {
+    font-size: 22px;
+    color: rgba(255,255,255,0.9);
+  }
+
+  .alert-text strong {
+    color: #FFB74D;
+    font-weight: 600;
+  }
+
+  .alert-contact {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 6px;
+  }
+
+  /* ========== 底部 ========== */
+  .footer {
+    margin-top: 40px;
+    text-align: center;
+    position: relative;
+  }
+
+  .footer .deco-line {
+    width: 300px;
+    height: 3px;
+    background: linear-gradient(90deg, #1A73E8, #00BFA5);
+    border-radius: 2px;
+    margin: 0 auto 30px auto;
+  }
+
+  .footer .company-name {
+    font-size: 20px;
+    color: rgba(255,255,255,0.45);
+    line-height: 1.7;
+    letter-spacing: 1px;
+  }
+
+  .footer-spacer {
+    height: 40px;
+  }
+
+  /* ========== 装饰背景元素 ========== */
+  body::before {
+    content: "";
+    position: fixed;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(26,115,232,0.06) 0%, transparent 70%);
+    top: 300px;
+    right: -200px;
+    pointer-events: none;
+  }
+
+  body::after {
+    content: "";
+    position: fixed;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,191,165,0.06) 0%, transparent 70%);
+    bottom: 200px;
+    left: -150px;
+    pointer-events: none;
+  }
+</style>
+</head>
+<body>
+
+<!-- ==================== 顶部区域 ==================== -->
+<div class="header">
+  <!-- 装饰几何图形 -->
+  <div class="geo-deco geo-circle-1"></div>
+  <div class="geo-deco geo-circle-2"></div>
+  <div class="geo-deco geo-circle-3"></div>
+  <div class="geo-deco geo-circle-4"></div>
+  <div class="geo-deco geo-circle-5"></div>
+  <div class="geo-line-1"></div>
+  <div class="geo-line-2"></div>
+  <div class="geo-dots">
+    <span></span><span></span><span></span><span></span><span></span>
+  </div>
+  <div class="geo-dots2">
+    <span></span><span></span><span></span>
+  </div>
+  <h1>各类组织关系转入</h1>
+  <div class="subtitle">入职报到补充指引 &middot; 2026届管理培训生</div>
+</div>
+
+<!-- ==================== 档案转入 ==================== -->
+<div class="card">
+  <div class="card-title">
+    <span class="icon">&#128193;</span>档案转入
+  </div>
+  <div class="info-row">
+    <span class="info-label">转入地址</span>
+    <span class="info-value">柳州高新区（柳东新区）人才交流服务中心</span>
+  </div>
+  <div class="info-note">
+    学校统一办理档案转接的，党员档案将跟随人事档案一起传递。
+  </div>
+</div>
+
+<!-- ==================== 户口迁移 ==================== -->
+<div class="card">
+  <div class="card-title">
+    <span class="icon">&#128100;</span>户口迁移
+  </div>
+  <div class="info-row">
+    <span class="info-label">迁移地址</span>
+    <span class="info-value">广西柳州市城中区高新一路15号集体户（柳东新区人才中心集体户）</span>
+  </div>
+  <div class="info-note">
+    如户口不迁移，则自行联系相关部门处理。
+  </div>
+</div>
+
+<!-- ==================== 党组织关系转入 ==================== -->
+<div class="card">
+  <div class="card-title">
+    <span class="icon">&#127963;&#65039;</span>党组织关系转入
+  </div>
+  <div class="info-note" style="margin-top: 0; margin-bottom: 20px; color: #4FC3F7;">
+    入党志愿书复印件需在入职报到时提交
+  </div>
+
+  <!-- 4a. 广西区内 -->
+  <div class="sub-card tag-green">
+    <div class="sub-tag">广西区内</div>
+    <div class="sub-section-title">转接平台</div>
+    <div class="sub-section-value">全国党员管理信息系统</div>
+    <div class="sub-section-title">操作方式</div>
+    <div class="sub-section-value">
+      ① 搜索目标党组织<br>
+      <span class="highlight-text-green">「{党委}」</span><br>
+      ② 完成全国党员信息系统上的网络转移
+    </div>
+  </div>
+
+  <!-- 4b. 广西区外 - 已接入互转 -->
+  <div class="sub-card tag-blue">
+    <div class="sub-tag">广西区外 - 已接入互转</div>
+    <div class="sub-section-title">操作步骤</div>
+    <div class="sub-section-value">
+      ① 选择<span class="highlight-text">「跨省系统转接」</span> &rarr; 选择<span class="highlight-text">「广西」</span><br>
+      ② 搜索到 <span class="highlight-text">「{党委}」</span><br>
+      ③ 完成网络转移
+    </div>
+  </div>
+
+  <!-- 4c. 广西区外 - 未接入互转 -->
+  <div class="sub-card tag-orange">
+    <div class="sub-tag">广西区外 - 未接入互转</div>
+    <div class="sub-section-title">操作步骤</div>
+    <div class="sub-section-value">
+      ① 选择<span class="highlight-text-orange">「跨省系统转接」</span> &rarr; 选择<span class="highlight-text-orange">「广西」</span><br>
+      ② 搜索不到目标党组织 &rarr; 需开具<span class="highlight-text-orange">纸质版介绍信</span><br>
+      ③ 介绍信抬头：<span class="highlight-text-orange">{党委}</span><br>
+      ④ 目标党组织：<span class="highlight-text-orange">{党委}</span>
+    </div>
+  </div>
+
+  <!-- 温馨提示 -->
+  <div class="tip-box">
+    <div class="tip-title">&#128293; 温馨提示</div>
+    <p>&#8226; 已接入全国互转的省市，一律通过系统转移</p>
+    <p>&#8226; 未接入全国互转的省市，需要开具纸质版介绍信</p>
+  </div>
+</div>
+
+<!-- ==================== 重要提醒 ==================== -->
+<div class="card alert-card">
+  <div class="card-title">
+    <span class="icon">&#9888;&#65039;</span>重要提醒
+  </div>
+  <div class="alert-item">
+    <div class="alert-bullet"></div>
+    <div class="alert-text">入职报到时请提交<strong>入党志愿书复印件</strong></div>
+  </div>
+  <div class="alert-item">
+    <div class="alert-bullet"></div>
+    <div class="alert-text">
+      如有疑问请联系人力资源负责人<br>
+      <strong>林锦丽</strong>&ensp;15777192120
+    </div>
+  </div>
+  <div class="alert-item">
+    <div class="alert-bullet"></div>
+    <div class="alert-text">材料提交邮箱：<strong>jinli.lin@lzsaike.com</strong></div>
+  </div>
+</div>
+
+<!-- ==================== 底部 ==================== -->
+<div class="footer">
+  <div class="deco-line"></div>
+  <div class="company-name">
+    {公司1}<br>
+    {公司2}
+  </div>
+</div>
+<div class="footer-spacer"></div>
+
+</body>
+</html>
