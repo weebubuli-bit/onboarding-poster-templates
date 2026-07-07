@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=750">
+<title>2026届管理培训生入职报到指南 V2</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    width: 750px;
+    margin: 0 auto;
+    background: linear-gradient(180deg, #F0F7FF 0%, #E8F4F8 100%);
+    font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", sans-serif;
+    color: #1A2332;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* 背景装饰光斑 - 浅色版 */
+  body::before {
+    content: '';
+    position: fixed;
+    top: -100px;
+    left: -100px;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(21,101,192,0.06) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+  }
+  body::after {
+    content: '';
+    position: fixed;
+    bottom: 200px;
+    right: -150px;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(0,137,123,0.05) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    width: 750px;
+    padding: 0 32px;
+    position: relative;
+    z-index: 1;
+    padding-bottom: 60px;
+  }
+
+  /* ========== Hero 区域 ========== */
+  .hero {
+    width: 750px;
+    margin-left: -32px;
+    height: 450px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    padding: 40px 48px 36px;
+  }
+
+  .hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.6) 55%, rgba(255,255,255,0.92) 100%);
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-title {
+    font-size: 48px;
+    font-weight: 800;
+    letter-spacing: 4px;
+    line-height: 1.3;
+    background: linear-gradient(135deg, #1565C0 0%, #1976D2 50%, #00897B 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 8px;
+  }
+
+  .hero-subtitle {
+    font-size: 36px;
+    font-weight: 700;
+    letter-spacing: 6px;
+    color: #1A2332;
+    margin-bottom: 20px;
+  }
+
+  .hero-company {
+    font-size: 18px;
+    color: #5A6B7F;
+    letter-spacing: 1px;
+    line-height: 1.6;
+  }
+
+  /* ========== 通用卡片样式 - 亮色版 ========== */
+  .card {
+    background: #FFFFFF;
+    border-radius: 16px;
+    padding: 24px;
+    margin-top: 20px;
+    position: relative;
+    box-shadow: 0 4px 20px rgba(21,101,192,0.08);
+    border: 1px solid rgba(21,101,192,0.04);
+  }
+
+  .card-title {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    padding-left: 16px;
+    border-left: 5px solid;
+    border-image: linear-gradient(180deg, #1565C0, #00897B) 1;
+    line-height: 1.4;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #1A2332;
+  }
+
+  /* ========== 卡片间连接装饰线 ========== */
+  .connector {
+    width: 2px;
+    height: 20px;
+    margin: 0 auto;
+    background: linear-gradient(180deg, rgba(21,101,192,0.2), rgba(0,137,123,0.2));
+    border-radius: 1px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .connector::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 6px;
+    height: 6px;
+    background: linear-gradient(135deg, #1565C0, #00897B);
+    border-radius: 50%;
+    opacity: 0.6;
+  }
+
+  /* ========== 装饰插画区 ========== */
+  .card-illust {
+    width: calc(100% + 48px);
+    margin-left: -24px;
+    margin-top: -24px;
+    margin-bottom: 20px;
+    border-radius: 16px 16px 0 0;
+    overflow: hidden;
+    height: 180px;
+  }
+
+  .card-illust img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  /* ========== 所需证件表格 ========== */
+  .doc-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 18px;
+    line-height: 1.5;
+  }
+
+  .doc-table thead th {
+    background: #E3F2FD;
+    color: #1565C0;
+    font-weight: 600;
+    padding: 12px 10px;
+    text-align: left;
+    font-size: 17px;
+    border-bottom: 2px solid rgba(21,101,192,0.12);
+  }
+
+  .doc-table thead th:first-child {
+    border-radius: 8px 0 0 0;
+  }
+  .doc-table thead th:last-child {
+    border-radius: 0 8px 0 0;
+  }
+
+  .doc-table tbody td {
+    padding: 14px 10px;
+    border-bottom: 1px solid rgba(21,101,192,0.06);
+    color: #1A2332;
+    vertical-align: top;
+  }
+
+  .doc-table tbody tr:nth-child(even) {
+    background: #F8FBFF;
+  }
+
+  .doc-table tbody tr:nth-child(odd) {
+    background: #FFFFFF;
+  }
+
+  .doc-table tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  .doc-table tbody tr:last-child td:first-child {
+    border-radius: 0 0 0 8px;
+  }
+  .doc-table tbody tr:last-child td:last-child {
+    border-radius: 0 0 8px 0;
+  }
+
+  /* ========== 温馨提示 - 浅色版 ========== */
+  .tips {
+    background: #FFF8E1;
+    border-left: 4px solid #FFB300;
+    border-radius: 8px;
+    padding: 16px 18px;
+    margin-top: 18px;
+    font-size: 16px;
+    line-height: 1.7;
+    color: #5A6B7F;
+  }
+
+  .tips .tips-title {
+    font-weight: 700;
+    color: #E65100;
+    margin-bottom: 6px;
+    font-size: 17px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .tips ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .tips ul li {
+    position: relative;
+    padding-left: 16px;
+    margin-bottom: 4px;
+    color: #5A6B7F;
+  }
+
+  .tips ul li::before {
+    content: '\2022';
+    position: absolute;
+    left: 0;
+    color: #FFB300;
+  }
+
+  .tips ul li:last-child {
+    margin-bottom: 0;
+  }
+
+  /* ========== 接站安排 ========== */
+  .info-block {
+    margin-bottom: 14px;
+  }
+
+  .info-label {
+    font-size: 16px;
+    color: #5A6B7F;
+    margin-bottom: 4px;
+    font-weight: 500;
+  }
+
+  .info-value {
+    font-size: 20px;
+    color: #1A2332;
+    font-weight: 600;
+    line-height: 1.5;
+  }
+
+  .info-value.highlight {
+    color: #1976D2;
+  }
+
+  .info-value .sub {
+    font-size: 17px;
+    font-weight: 400;
+    color: #5A6B7F;
+    display: block;
+    margin-top: 2px;
+  }
+
+  /* ========== 入住须知列表 ========== */
+  .checkin-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .checkin-list > li {
+    padding: 8px 0;
+    font-size: 18px;
+    line-height: 1.6;
+    color: #1A2332;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .checkin-list > li::before {
+    content: '';
+    display: inline-block;
+    min-width: 8px;
+    height: 8px;
+    margin-top: 9px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #1565C0, #00897B);
+    flex-shrink: 0;
+  }
+
+  .checkin-list .sub-list {
+    list-style: none;
+    padding-left: 18px;
+    margin-top: 4px;
+  }
+
+  .checkin-list .sub-list li {
+    padding: 3px 0;
+    font-size: 17px;
+    color: #5A6B7F;
+    position: relative;
+    padding-left: 14px;
+  }
+
+  .checkin-list .sub-list li::before {
+    content: '\2013';
+    position: absolute;
+    left: 0;
+    color: #90A4AE;
+  }
+
+  /* ========== 入职大礼包 ========== */
+  .gift-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .gift-item {
+    border-radius: 12px;
+    padding: 20px 16px;
+    text-align: center;
+    border: 1px solid rgba(21,101,192,0.06);
+    transition: background 0.3s;
+  }
+
+  .gift-item.blue-bg {
+    background: #F0F7FF;
+  }
+
+  .gift-item.green-bg {
+    background: #E0F2F1;
+  }
+
+  .gift-item .gift-icon {
+    font-size: 36px;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .gift-item .gift-label {
+    font-size: 16px;
+    color: #5A6B7F;
+    margin-bottom: 4px;
+  }
+
+  .gift-item .gift-value {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1565C0;
+    line-height: 1.4;
+  }
+
+  .gift-item .gift-value.green {
+    color: #00897B;
+  }
+
+  .gift-item.full-width {
+    grid-column: 1 / -1;
+  }
+
+  /* ========== 材料提交截止提醒 ========== */
+  .deadline-card {
+    border: 2px solid rgba(21,101,192,0.15);
+    background: #FFFFFF;
+  }
+
+  .deadline-card .card-title {
+    border-image: linear-gradient(180deg, #1565C0, #00897B) 1;
+  }
+
+  .deadline-date {
+    font-size: 36px;
+    font-weight: 800;
+    text-align: center;
+    padding: 16px 0;
+    background: linear-gradient(135deg, #1565C0, #00897B);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: 2px;
+  }
+
+  .deadline-steps {
+    list-style: none;
+    padding: 0;
+    counter-reset: step;
+  }
+
+  .deadline-steps li {
+    counter-increment: step;
+    padding: 10px 10px 10px 48px;
+    position: relative;
+    font-size: 18px;
+    line-height: 1.6;
+    color: #1A2332;
+    margin-bottom: 4px;
+  }
+
+  .deadline-steps li::before {
+    content: counter(step);
+    position: absolute;
+    left: 0;
+    top: 10px;
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    background: linear-gradient(135deg, #1565C0, #00897B);
+    border-radius: 50%;
+    font-size: 16px;
+    font-weight: 700;
+    color: #FFFFFF;
+  }
+
+  .deadline-steps li:last-child {
+    margin-bottom: 0;
+  }
+
+  .email-block {
+    background: #E0F2F1;
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-top: 18px;
+    text-align: center;
+  }
+
+  .email-block .email-label {
+    font-size: 15px;
+    color: #5A6B7F;
+    margin-bottom: 6px;
+  }
+
+  .email-block .email-addr {
+    font-size: 20px;
+    font-weight: 700;
+    color: #00897B;
+    letter-spacing: 0.5px;
+  }
+
+  .email-block .email-subject {
+    font-size: 16px;
+    color: #5A6B7F;
+    margin-top: 8px;
+    font-style: italic;
+  }
+
+  /* ========== 底部 ========== */
+  .footer {
+    margin-top: 40px;
+    text-align: center;
+    padding: 0 20px 40px;
+  }
+
+  .footer-divider {
+    width: 200px;
+    height: 3px;
+    margin: 0 auto 30px;
+    background: linear-gradient(90deg, #1565C0, #00897B, #1565C0);
+    border-radius: 2px;
+    background-size: 200% 100%;
+    animation: gradientMove 3s ease infinite;
+  }
+
+  @keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  .footer-company {
+    font-size: 20px;
+    font-weight: 600;
+    color: #5A6B7F;
+    line-height: 1.8;
+    letter-spacing: 2px;
+  }
+
+  .footer-date {
+    font-size: 18px;
+    color: #90A4AE;
+    margin-top: 10px;
+    letter-spacing: 4px;
+  }
+
+  .footer-spacer {
+    height: 60px;
+  }
+
+  /* ========== 通用工具 ========== */
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(21,101,192,0.12), transparent);
+    margin: 16px 0;
+  }
+
+  .text-accent-blue {
+    color: #1976D2;
+  }
+
+  .text-accent-green {
+    color: #00897B;
+  }
+
+  .text-bold {
+    font-weight: 700;
+  }
+
+  .text-gradient {
+    background: linear-gradient(135deg, #1565C0, #00897B);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+  }
+
+  /* 装饰光斑 - 浅色版 */
+  .glow-dot {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #1976D2;
+    opacity: 0.15;
+    z-index: 0;
+    filter: blur(2px);
+  }
+
+  .glow-dot.green {
+    background: #00897B;
+  }
+
+  .glow-dot.blue {
+    background: #1565C0;
+    width: 8px;
+    height: 8px;
+  }
+</style>
+</head>
+<body>
+
+<!-- 额外装饰光斑 -->
+<div class="glow-dot blue" style="top:480px; left:60px;"></div>
+<div class="glow-dot green" style="top:510px; right:80px;"></div>
+<div class="glow-dot" style="top:1200px; left:100px;"></div>
+<div class="glow-dot green" style="top:1800px; right:70px;"></div>
+<div class="glow-dot blue" style="top:2400px; left:50px;"></div>
+<div class="glow-dot" style="top:3000px; right:90px;"></div>
+
+<div class="container">
+
+  <!-- ========== 1. Hero 区域 ========== -->
+  <div class="hero">
+    <img class="hero-bg" src="assets/illust_hero_v2.jpg" alt="主视觉">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-title">2026届管理培训生</div>
+      <div class="hero-subtitle">入职报到指南</div>
+      <div class="hero-company">{公司1}<br>{公司2}</div>
+    </div>
+  </div>
+
+  <!-- 连接线 -->
+  <div class="connector"></div>
+
+  <!-- ========== 2. 所需证件 ========== -->
+  <div class="card">
+    <div class="card-title">📋 所需证件</div>
+    <table class="doc-table">
+      <thead>
+        <tr>
+          <th style="width:30%;">证件</th>
+          <th style="width:45%;">携带内容</th>
+          <th style="width:25%;">数量</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="text-bold">毕业证&学位证</td>
+          <td>原件&复印件</td>
+          <td>1&2<br><span style="font-size:14px;color:#5A6B7F;">（含第二学历）</span></td>
+        </tr>
+        <tr>
+          <td class="text-bold">第二代身份证</td>
+          <td>原件&复印件</td>
+          <td>1&2</td>
+        </tr>
+        <tr>
+          <td class="text-bold">外语等级证书&<br>成绩单</td>
+          <td>原件&复印件</td>
+          <td>1&1</td>
+        </tr>
+        <tr>
+          <td class="text-bold">党组织关系转移<br>介绍信</td>
+          <td>原件</td>
+          <td>1<br><span style="font-size:14px;color:#5A6B7F;">（线上转无需）</span></td>
+        </tr>
+        <tr>
+          <td class="text-bold">入党志愿书</td>
+          <td>复印件</td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <td class="text-bold">近期一寸免冠<br>彩照</td>
+          <td>电子版</td>
+          <td>1</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="tips">
+      <div class="tips-title">💡 温馨提示</div>
+      <ul>
+        <li>身份证需复印正反两面在同一页</li>
+        <li>未携带毕业证&学位证将无法完成报到</li>
+        <li>联系人：林锦丽 15777192120</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 连接线 -->
+  <div class="connector"></div>
+
+  <!-- ========== 3. 接站安排 ========== -->
+  <div class="card">
+    <div class="card-title">🚄 接站安排</div>
+    <div class="info-block">
+      <div class="info-label">接站时间</div>
+      <div class="info-value">7月20日</div>
+      <div class="info-value .sub" style="font-size:16px;color:#5A6B7F;margin-top:2px;">（具体时段视需要而定）</div>
+    </div>
+    <div class="info-block">
+      <div class="info-label">接站地点</div>
+      <div class="info-value highlight">柳州火车站东广场出口处</div>
+    </div>
+    <div class="tips">
+      <div class="tips-title">💡 温馨提示</div>
+      <ul>
+        <li>乘坐汽车、飞机或非接站时间到柳州的同学，请自行前往宝骏家园</li>
+        <li>地址：广西壮族自治区柳州市鱼峰区宝骏大道8号 宝骏家园二期</li>
+        <li>公交：BRT快1路、快9路 → "柳东公交站"站下车</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 连接线 -->
+  <div class="connector"></div>
+
+  <!-- ========== 4. 入住须知 ========== -->
+  <div class="card">
+    <div class="card-illust">
+      <img src="assets/illust_city_v2.jpg" alt="城市入住">
+    </div>
+    <div class="card-title">🏠 入住须知</div>
+    <ul class="checkin-list">
+      <li>
+        <div>
+          <span class="text-bold">办理时间：</span>每日 9:00-17:30
+        </div>
+      </li>
+      <li>
+        <div>
+          <span class="text-bold">办理地址：</span>宝骏家园一期1B栋一楼物业中心
+          <div style="font-size:16px;color:#1976D2;margin-top:2px;">📞 18178285005</div>
+        </div>
+      </li>
+      <li>
+        <div>
+          <span class="text-bold">需携带：</span>
+          <ul class="sub-list">
+            <li>押金310元（可微信/支付宝支付）</li>
+            <li>身份证复印件一份（物业复印1元/张，仅收现金）</li>
+          </ul>
+        </div>
+      </li>
+      <li>
+        <div>
+          <span class="text-bold">行李邮寄地址：</span>广西柳州市鱼峰区宝骏大道8号宝骏家园二期门岗
+          <div style="font-size:16px;color:#00897B;margin-top:2px;">📦 收件人：杨曾友 138 7824 6662</div>
+        </div>
+      </li>
+    </ul>
+    <div class="tips">
+      <div class="tips-title">💡 温馨提示</div>
+      <ul>
+        <li>行李上贴标签"2026届新员工XXX+联系方式"</li>
+        <li>避免邮寄贵重或易碎物品</li>
+        <li>7月开始正式接收，保管好邮寄凭证</li>
+        <li>请直接快递至宝骏家园，勿寄到营业厅/中转站</li>
+        <li>物业提供床垫、被子，需自带枕头等个人用品</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 连接线 -->
+  <div class="connector"></div>
+
+  <!-- ========== 5. 入职大礼包 ========== -->
+  <div class="card">
+    <div class="card-illust">
+      <img src="assets/illust_energy_v2.jpg" alt="新能源">
+    </div>
+    <div class="card-title">🎁 入职大礼包</div>
+    <div class="gift-grid">
+      <div class="gift-item blue-bg">
+        <span class="gift-icon">💰</span>
+        <div class="gift-label">安家费</div>
+        <div class="gift-value">本科 4000 元</div>
+        <div class="gift-value green" style="font-size:16px;margin-top:2px;">硕士 5000 元</div>
+      </div>
+      <div class="gift-item green-bg">
+        <span class="gift-icon">🧳</span>
+        <div class="gift-label">行李托运补贴</div>
+        <div class="gift-value">100 元</div>
+      </div>
+      <div class="gift-item green-bg">
+        <span class="gift-icon">🚌</span>
+        <div class="gift-label">交通费用补贴</div>
+        <div class="gift-value">400 元</div>
+      </div>
+      <div class="gift-item blue-bg">
+        <span class="gift-icon">👕</span>
+        <div class="gift-label">实物礼包</div>
+        <div class="gift-value green" style="font-size:17px;">劳保用品<br>文化衫 + 伴手礼</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 连接线 -->
+  <div class="connector"></div>
+
+  <!-- ========== 6. 材料提交截止提醒 ========== -->
+  <div class="card deadline-card">
+    <div class="card-title">⏰ 材料提交截止提醒</div>
+    <div class="deadline-date">7月3日前</div>
+    <div class="divider"></div>
+    <ol class="deadline-steps">
+      <li>扫描二维码填写报到回执</li>
+      <li>提交一寸彩色免冠照（制作员工牌用）</li>
+      <li>毕业证、学位证扫描件（jpg格式，命名"学校+姓名（毕业证/学位证）"）</li>
+    </ol>
+    <div class="email-block">
+      <div class="email-label">📧 请将材料发送至</div>
+      <div class="email-addr">jinli.lin@lzsaike.com</div>
+      <div class="email-subject">邮件主题：姓名+2026届管培生材料</div>
+    </div>
+  </div>
+
+  <!-- ========== 7. 底部 ========== -->
+  <div class="footer">
+    <div class="footer-divider"></div>
+    <div class="footer-company">
+      {公司1}<br>
+      {公司2}
+    </div>
+    <div class="footer-date">二〇二六年六月二十九日</div>
+  </div>
+
+  <div class="footer-spacer"></div>
+
+</div>
+
+</body>
+</html>
