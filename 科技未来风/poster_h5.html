@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>2026届管理培训生入职报到指南</title>
+<style>
+/* ========== Reset & Base ========== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html, body {
+  width: 100%; height: 100%;
+  overflow: hidden;
+  font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", sans-serif;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ========== Container ========== */
+.h5-container {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  position: fixed;
+  top: 0; left: 0;
+  background: linear-gradient(180deg, #0A0E27 0%, #1A1E3A 100%);
+}
+
+/* ========== Pages ========== */
+.page {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100vh;
+  opacity: 0;
+  transform: translateY(100%);
+  transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  pointer-events: none;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  -webkit-overflow-scrolling: touch;
+}
+.page::-webkit-scrollbar { display: none; }
+.page.active {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+  z-index: 2;
+}
+.page.prev {
+  opacity: 0;
+  transform: translateY(-100%);
+  z-index: 1;
+}
+
+/* ========== Content Area ========== */
+.page-content {
+  width: 100%;
+  max-width: 420px;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ========== Animation Classes ========== */
+.animate-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  will-change: transform, opacity;
+}
+.page.active .animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+.anim-scale {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  will-change: transform, opacity;
+}
+.page.active .anim-scale {
+  opacity: 1;
+  transform: scale(1);
+}
+.anim-card {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  will-change: transform, opacity;
+}
+.page.active .anim-card {
+  opacity: 1;
+  transform: translateY(0);
+}
+.anim-slide-left {
+  opacity: 0;
+  transform: translateX(-20px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  will-change: transform, opacity;
+}
+.page.active .anim-slide-left {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ========== Page Indicator ========== */
+.page-indicator {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 100;
+  padding: 6px 12px;
+  background: rgba(10, 14, 39, 0.6);
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.page-indicator .dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: rgba(0,245,255,0.3);
+  transition: all 0.3s ease;
+}
+.page-indicator .dot.active {
+  width: 24px;
+  border-radius: 4px;
+  background: #00F5FF;
+  box-shadow: 0 0 8px rgba(0,245,255,0.5);
+}
+
+/* ========== Neon Particle Decorations ========== */
+.neon-particle {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
+@keyframes twinkle {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 1; }
+}
+@keyframes twinkle2 {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 0.15; }
+}
+@keyframes twinkle3 {
+  0%, 100% { opacity: 0.1; }
+  30% { opacity: 0.9; }
+  70% { opacity: 0.3; }
+}
+
+/* Circuit line decorations (CSS pseudo-elements) */
+.circuit-line::before,
+.circuit-line::after {
+  content: '';
+  position: absolute;
+  background: rgba(0,245,255,0.08);
+  pointer-events: none;
+  z-index: 0;
+}
+.circuit-line::before {
+  width: 1px;
+  height: 60px;
+  top: 20%;
+  right: 12%;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0,245,255,0.15) 0px,
+    rgba(0,245,255,0.15) 3px,
+    transparent 3px,
+    transparent 8px
+  );
+}
+.circuit-line::after {
+  width: 1px;
+  height: 40px;
+  bottom: 25%;
+  left: 10%;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(123,47,255,0.12) 0px,
+    rgba(123,47,255,0.12) 3px,
+    transparent 3px,
+    transparent 8px
+  );
+}
+
+/* Data flow vertical lines */
+.data-flow {
+  position: absolute;
+  width: 1px;
+  height: 100%;
+  top: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.06;
+}
+.data-flow-1 {
+  left: 15%;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 10px,
+    #00F5FF 10px,
+    #00F5FF 12px,
+    transparent 12px,
+    transparent 30px
+  );
+}
+.data-flow-2 {
+  right: 20%;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 15px,
+    #7B2FFF 15px,
+    #7B2FFF 17px,
+    transparent 17px,
+    transparent 40px
+  );
+}
+.data-flow-3 {
+  left: 60%;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 20px,
+    #FF0080 20px,
+    #FF0080 22px,
+    transparent 22px,
+    transparent 50px
+  );
+}
+
+/* ========== Pulse Glow Animation ========== */
+@keyframes pulse-glow {
+  0%, 100% { text-shadow: 0 0 4px rgba(255,0,128,0.3); }
+  50% { text-shadow: 0 0 16px rgba(255,0,128,0.7), 0 0 30px rgba(255,0,128,0.3), 0 0 50px rgba(255,0,128,0.1); }
+}
+.pulse-text {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Pulse glow for cyan */
+@keyframes pulse-glow-cyan {
+  0%, 100% { box-shadow: 0 0 5px rgba(0,245,255,0.2); }
+  50% { box-shadow: 0 0 15px rgba(0,245,255,0.4), 0 0 30px rgba(0,245,255,0.1); }
+}
+
+/* ========== Scroll Arrow ========== */
+@keyframes bounce-up {
+  0%, 100% { transform: translateY(0); opacity: 1; }
+  50% { transform: translateY(-10px); opacity: 0.6; }
+}
+.scroll-arrow {
+  animation: bounce-up 1.8s ease-in-out infinite;
+}
+
+/* ========== Neon Glow Blink for SCROLL text ========== */
+@keyframes neon-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+/* ========== Glass Card ========== */
+.glass-card {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 16px;
+  padding: 18px 16px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 0 20px rgba(0,245,255,0.08);
+  width: 100%;
+}
+.glass-card-highlight {
+  border-left: 3px solid #00F5FF;
+  box-shadow: 0 0 20px rgba(0,245,255,0.08), -3px 0 12px rgba(0,245,255,0.15);
+}
+.glass-card-warn {
+  background: rgba(255,0,128,0.08);
+  border-left: 3px solid #FF0080;
+  border-radius: 12px;
+  padding: 12px 14px;
+  font-size: 13px;
+  color: rgba(255,255,255,0.7);
+  line-height: 1.6;
+  margin-top: 12px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+.glass-card-warn strong { color: #FF0080; }
+
+/* ========== Neon Title Style ========== */
+.neon-title {
+  font-family: "Courier New", monospace;
+  color: #00F5FF;
+  text-shadow: 0 0 10px rgba(0,245,255,0.5), 0 0 20px rgba(0,245,255,0.2);
+}
+.neon-title-purple {
+  font-family: "Courier New", monospace;
+  color: #7B2FFF;
+  text-shadow: 0 0 10px rgba(123,47,255,0.5), 0 0 20px rgba(123,47,255,0.2);
+}
+
+/* English sub-label */
+.eng-label {
+  font-family: "Courier New", monospace;
+  font-size: 9px;
+  color: #7B2FFF;
+  letter-spacing: 3px;
+  text-align: center;
+  margin-top: 2px;
+  margin-bottom: 14px;
+  opacity: 0.8;
+}
+
+/* Neon dot list item */
+.doc-list {
+  list-style: none;
+  width: 100%;
+}
+.doc-list li {
+  display: flex;
+  align-items: flex-start;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  font-size: 13.5px;
+  color: rgba(255,255,255,0.85);
+  line-height: 1.5;
+}
+.doc-list li:last-child { border-bottom: none; }
+.doc-list .doc-dot {
+  width: 4px;
+  height: 4px;
+  min-width: 4px;
+  border-radius: 50%;
+  background: #00F5FF;
+  box-shadow: 0 0 6px rgba(0,245,255,0.6), 0 0 12px rgba(0,245,255,0.3);
+  margin-right: 10px;
+  margin-top: 8px;
+  flex-shrink: 0;
+}
+.doc-list .doc-name {
+  font-weight: 600;
+  color: #00F5FF;
+  min-width: 0;
+  flex-shrink: 0;
+  margin-right: 4px;
+}
+.doc-list .doc-detail {
+  color: rgba(255,255,255,0.5);
+  font-size: 12.5px;
+}
+
+/* Section image */
+.seg-img {
+  width: 85%;
+  max-width: 320px;
+  border-radius: 12px;
+  object-fit: cover;
+  border: 1px solid rgba(0,245,255,0.2);
+  box-shadow: 0 0 15px rgba(0,245,255,0.1);
+}
+
+/* Info row */
+.info-row {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 10px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: rgba(255,255,255,0.85);
+}
+.info-label {
+  color: rgba(255,255,255,0.5);
+  min-width: 80px;
+  flex-shrink: 0;
+}
+.info-value {
+  color: rgba(255,255,255,0.85);
+  font-weight: 500;
+}
+.info-value.highlight {
+  color: #00F5FF;
+  font-weight: 700;
+  text-shadow: 0 0 6px rgba(0,245,255,0.3);
+}
+
+/* Gift grid */
+.gift-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  width: 100%;
+  margin-top: 4px;
+}
+.gift-card {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 14px;
+  padding: 14px 12px;
+  text-align: center;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 0 20px rgba(0,245,255,0.08);
+}
+.gift-card .gift-icon { font-size: 28px; margin-bottom: 6px; }
+.gift-card .gift-name { font-size: 13px; color: rgba(255,255,255,0.5); margin-bottom: 4px; }
+.gift-card .gift-amount { font-size: 24px; font-weight: 800; color: #00F5FF; text-shadow: 0 0 8px rgba(0,245,255,0.4); }
+.gift-card .gift-unit { font-size: 12px; color: rgba(255,255,255,0.4); font-weight: 400; }
+.gift-card.purple .gift-amount { color: #7B2FFF; text-shadow: 0 0 8px rgba(123,47,255,0.4); }
+.gift-card .gift-desc { font-size: 11.5px; color: rgba(255,255,255,0.45); margin-top: 4px; line-height: 1.4; }
+
+/* Step items */
+.step-list {
+  width: 100%;
+  margin-top: 10px;
+}
+.step-item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+.step-num {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(0,245,255,0.4);
+  color: #00F5FF;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: "Courier New", monospace;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-right: 12px;
+  margin-top: 2px;
+  text-shadow: 0 0 6px rgba(0,245,255,0.4);
+}
+.step-text {
+  font-size: 14px;
+  color: rgba(255,255,255,0.85);
+  line-height: 1.6;
+}
+
+/* Email block */
+.email-block {
+  background: rgba(0,245,255,0.06);
+  border: 1px solid rgba(0,245,255,0.15);
+  border-radius: 10px;
+  padding: 12px 14px;
+  text-align: center;
+  margin-top: 14px;
+}
+.email-block .email-label {
+  font-size: 12px;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 4px;
+}
+.email-block .email-addr {
+  font-size: 15px;
+  font-weight: 700;
+  color: #00F5FF;
+  word-break: break-all;
+  text-shadow: 0 0 6px rgba(0,245,255,0.3);
+  font-family: "Courier New", monospace;
+}
+
+/* Deadline card pink border */
+.deadline-card {
+  border: 1px solid rgba(255,0,128,0.4);
+  box-shadow: 0 0 20px rgba(255,0,128,0.15);
+}
+.deadline-date {
+  font-size: 30px;
+  font-weight: 800;
+  color: #FF0080;
+  text-align: center;
+  margin: 8px 0;
+  font-family: "Courier New", monospace;
+}
+
+/* ========== PAGE 1: Cover ========== */
+.page-1 {
+  background: #0A0E27;
+  justify-content: flex-end;
+  position: relative;
+}
+.page-1 .cover-bg {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  opacity: 0.85;
+}
+.page-1 .cover-overlay-top {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 40%;
+  background: linear-gradient(to bottom, rgba(10,14,39,0.9) 0%, transparent 100%);
+  z-index: 1;
+}
+.page-1 .cover-overlay-bottom {
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 100%; height: 60%;
+  background: linear-gradient(to top, rgba(10,14,39,0.97) 0%, rgba(10,14,39,0.5) 50%, transparent 100%);
+  z-index: 1;
+}
+.page-1 .cover-text {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding-bottom: 50px;
+  width: 100%;
+  max-width: 420px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.page-1 .cover-title {
+  font-size: 38px;
+  font-weight: 800;
+  font-family: "Courier New", monospace;
+  color: #00F5FF;
+  text-shadow: 0 0 10px rgba(0,245,255,0.5), 0 0 20px rgba(0,245,255,0.25), 0 0 40px rgba(0,245,255,0.1);
+  margin-bottom: 8px;
+  letter-spacing: 2px;
+}
+.page-1 .cover-subtitle {
+  font-size: 26px;
+  font-weight: 700;
+  font-family: "Courier New", monospace;
+  color: #7B2FFF;
+  text-shadow: 0 0 10px rgba(123,47,255,0.5), 0 0 20px rgba(123,47,255,0.2);
+  margin-bottom: 20px;
+  letter-spacing: 2px;
+}
+.page-1 .cover-company {
+  font-size: 13px;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.7;
+}
+.page-1 .cover-arrow {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  color: #00F5FF;
+  font-size: 11px;
+  text-align: center;
+  font-family: "Courier New", monospace;
+  letter-spacing: 2px;
+  text-shadow: 0 0 6px rgba(0,245,255,0.4);
+  animation: neon-blink 2s ease-in-out infinite, bounce-up 1.8s ease-in-out infinite;
+}
+.page-1 .cover-arrow span {
+  display: block;
+  font-size: 18px;
+  margin-bottom: 2px;
+}
+
+/* ========== Content Page Wrapper ========== */
+.page-content-page {
+  padding-top: 28px;
+  padding-bottom: 80px;
+  width: 100%;
+  max-width: 420px;
+  padding-left: 20px;
+  padding-right: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.section-title {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 2px;
+  text-align: center;
+  width: 100%;
+}
+.section-img {
+  margin-bottom: 14px;
+}
+
+/* ========== PAGE 7: Ending ========== */
+.page-7 {
+  background: #0A0E27;
+  justify-content: center;
+  position: relative;
+}
+/* Scanline effect */
+.page-7::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 2px,
+    rgba(0,245,255,0.03) 2px,
+    rgba(0,245,255,0.03) 4px
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+.page-7 .end-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 0 30px;
+}
+.page-7 .end-title {
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.5;
+  margin-bottom: 24px;
+}
+.page-7 .end-divider {
+  width: 80%;
+  height: 2px;
+  background: linear-gradient(90deg, #00F5FF, #7B2FFF, #FF0080);
+  margin: 0 auto 24px;
+  border-radius: 1px;
+  box-shadow: 0 0 10px rgba(0,245,255,0.2), 0 0 10px rgba(123,47,255,0.2);
+}
+.page-7 .end-company {
+  font-size: 14px;
+  color: rgba(255,255,255,0.8);
+  line-height: 2;
+}
+.page-7 .end-date {
+  font-size: 14px;
+  color: rgba(255,255,255,0.6);
+  margin-top: 16px;
+}
+
+/* QR area on last page */
+.qr-area {
+  margin-top: 30px;
+  text-align: center;
+}
+.qr-area .qr-card {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 16px;
+  padding: 24px;
+  display: inline-block;
+  max-width: 80%;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 0 20px rgba(0,245,255,0.08);
+}
+.qr-area .qr-label {
+  font-size: 14px;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 12px;
+}
+.qr-area .qr-box {
+  width: 140px;
+  height: 140px;
+  border: 2px dashed rgba(0,245,255,0.5);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+  box-shadow: 0 0 10px rgba(0,245,255,0.1);
+}
+.qr-area .qr-placeholder {
+  font-size: 12px;
+  color: rgba(0,245,255,0.4);
+  font-family: "Courier New", monospace;
+}
+.qr-area .qr-link {
+  font-size: 12px;
+  color: rgba(255,255,255,0.5);
+  margin-top: 4px;
+}
+</style>
+</head>
+<body>
+
+<div class="h5-container" id="h5Container">
+
+  <!-- ==================== PAGE 1: Cover ==================== -->
+  <div class="page page-1 active" id="page1">
+    <img src="assets/cover.jpg" class="cover-bg" alt="封面">
+    <div class="cover-overlay-top"></div>
+    <div class="cover-overlay-bottom"></div>
+
+    <!-- Neon particles -->
+    <div class="neon-particle" style="width:4px;height:4px;background:#00F5FF;box-shadow:0 0 6px #00F5FF,0 0 12px rgba(0,245,255,0.4);top:12%;left:15%;animation:twinkle 3s ease-in-out infinite;"></div>
+    <div class="neon-particle" style="width:3px;height:3px;background:#7B2FFF;box-shadow:0 0 6px #7B2FFF,0 0 12px rgba(123,47,255,0.4);top:20%;right:20%;animation:twinkle2 4s ease-in-out infinite;"></div>
+    <div class="neon-particle" style="width:5px;height:5px;background:#FF0080;box-shadow:0 0 8px #FF0080,0 0 16px rgba(255,0,128,0.4);top:35%;left:8%;animation:twinkle3 3.5s ease-in-out infinite;"></div>
+    <div class="neon-particle" style="width:3px;height:3px;background:#00F5FF;box-shadow:0 0 6px #00F5FF;bottom:35%;right:12%;animation:twinkle 5s ease-in-out infinite;"></div>
+    <div class="neon-particle" style="width:4px;height:4px;background:#7B2FFF;box-shadow:0 0 8px #7B2FFF;top:50%;left:25%;animation:twinkle2 3s ease-in-out infinite;"></div>
+    <div class="neon-particle" style="width:3px;height:3px;background:#00F5FF;box-shadow:0 0 6px #00F5FF;bottom:45%;left:45%;animation:twinkle3 4.5s ease-in-out infinite;"></div>
+    <div class="neon-particle" style="width:4px;height:4px;background:#FF0080;box-shadow:0 0 8px #FF0080;top:8%;left:55%;animation:twinkle 3.8s ease-in-out infinite;"></div>
+    <div class="neon-particle" style="width:3px;height:3px;background:#00F5FF;box-shadow:0 0 6px #00F5FF;bottom:25%;right:30%;animation:twinkle2 2.8s ease-in-out infinite;"></div>
+
+    <div class="cover-text">
+      <div class="animate-in cover-title" data-delay="0.2">2026届管理培训生</div>
+      <div class="animate-in cover-subtitle" data-delay="0.4">入职报到指南</div>
+      <div class="animate-in cover-company" data-delay="0.6">{公司1} / {公司2}</div>
+    </div>
+    <div class="cover-arrow">
+      <span>&#x25B2;</span>
+      SCROLL UP
+    </div>
+  </div>
+
+  <!-- ==================== PAGE 2: Documents ==================== -->
+  <div class="page page-2 circuit-line" id="page2" style="background: linear-gradient(180deg, #0A0E27 0%, #1A1E3A 100%);">
+    <!-- Data flow lines -->
+    <div class="data-flow data-flow-1"></div>
+    <div class="data-flow data-flow-2"></div>
+
+    <!-- Neon particles -->
+    <div class="neon-particle" style="width:3px;height:3px;background:#00F5FF;box-shadow:0 0 6px #00F5FF;top:10%;right:10%;animation:twinkle 4s ease-in-out infinite;"></div>
+    <div class="neon-particle" style="width:4px;height:4px;background:#7B2FFF;box-shadow:0 0 8px #7B2FFF;top:50%;left:6%;animation:twinkle2 3s ease-in-out infinite;"></div>
+    <div class="neon-particle" style="width:3px;height:3px;background:#FF0080;box-shadow:0 0 6px #FF0080;bottom:20%;right:15%;animation:twinkle3 3.5s ease-in-out infinite;"></div>
+
+    <div class="page-content-page">
+      <div class="animate-in section-title neon-title" data-delay="0.1">&gt;&gt; 所需证件</div>
+      <div class="animate-in eng-label" data-delay="0.15">REQUIRED_DOCUMENTS</div>
+      <img src="assets/docs.jpg" class="anim-scale seg-img section-img" alt="证件" data-delay="0.2">
+      <div class="anim-card glass-card glass-card-highlight" data-delay="0.35">
+        <ul class="doc-list">
+          <li class="anim-slide-left" data-delay="0.45">
+            <span class="doc-dot"></span>
+            <span class="doc-name">毕业证&学位证</span>
+            <span class="doc-detail">原件&复印件 1&2份（含第二学历）</span>
+          </li>
+          <li class="anim-slide-left" data-delay="0.55">
+            <span class="doc-dot"></span>
+            <span class="doc-name">身份证</span>
+            <span class="doc-detail">原件&复印件 1&2份</span>
+          </li>
+          <li class="anim-slide-left" data-delay="0.65">
+            <span class="doc-dot"></span>
+            <span class="doc-name">外语证书&成绩单</span>
+            <span class="doc-detail">原件&复印件 1&1份</span>
+          </li>
+          <li class="anim-slide-left" data-delay="0.75">
+            <span class="doc-dot"></span>
+            <span class="doc-name">党组织关系介绍信</span>
+            <span class="doc-detail">原件 1份（线上转无需）</span>
+          </li>
+          <li class="anim-slide-left" data-delay="0.85">
+            <span class="doc-dot"></span>
+            <span class="doc-name">入党志愿书</span>
+            <span class="doc-detail">复印件 1份</span>
+          </li>
+          <li class="anim-slide-left" data-delay="0.95">
+            <span class="doc-dot"></span>
+            <span class="doc-name">一寸免冠彩照</span>
+            <span class="doc-detail">电子版 1张</span>
+          </li>
+        </ul>
+        <div class="glass-card-warn">
+          <strong>// WARNING</strong><br>
+          请务必提前准备好所有证件原件及复印件，报到当天需现场核验。建议多备几份复印件以备不时之需。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== PAGE 3: Station Pickup ==================== -->
+  <div class="page page-3 circuit-line" id="page3" style="background: linear-gradient(180deg, #0A0E27 0%, #1A1E3A 100%);">
+    <div class="data-flow data-flow-1"></div>
+    <div class="data-flow data-flow-3"></div>
+
+    <div class="neon-particle" style="width:4px;height:4px;background:#00F5FF;box-shadow:0 0 6px #00F5FF;top:15%;left:12%;animation:twinkle2 3.5s ease-in-out infinite;"></div>
+    <div class="neon-particle" style="width:3px;height:3px;background:#7B2FFF;box-shadow:0 0 6px #7B2FFF;top:40%;right:8%;animation:twinkle 4s ease-in-out infinite;"></div>
+    <div class="neon-particle" style="width:5px;height:5px;background:#FF0080;box-shadow:0 0 8px #FF0080;bottom:30%;left:18%;animation:twinkle3 3s ease-in-out infinite;"></div>
+
+    <div class="page-content-page">
+      <div class="animate-in section-title neon-title" data-delay="0.1">&gt;&gt; 接站安排</div>
+      <div class="animate-in eng-label" data-delay="0.15">PICKUP_INFO</div>
+      <img src="assets/station.jpg" class="anim-scale seg-img section-img" alt="接站" data-delay="0.2">
+      <div class="anim-card glass-card glass-card-highlight" data-delay="0.35">
+        <div class="info-row animate-in" data-delay="0.45">
+          <span class="info-label">[TIME]</span>
+          <span class="info-value highlight">7月20日（报到当天）</span>
+        </div>
+        <div class="info-row animate-in" data-delay="0.55">
+          <span class="info-label">[LOC]</span>
+          <span class="info-value highlight">柳州火车站东广场出口处</span>
+        </div>
+        <div class="info-row animate-in" data-delay="0.65">
+          <span class="info-label">[SIGN]</span>
+          <span class="info-value">{品牌}接站牌</span>
+        </div>
+        <div class="glass-card-warn">
+          <strong>// NOTICE</strong><br>
+          出站后请留意"{品牌}"接站牌，工作人员将引导您上车。公交可乘快1号线或快9号线至"雒容"站下车。自行前往请导航至"{品牌}"。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== PAGE 4: Check-in ==================== -->
+  <div class="page page-4 circuit-line" id="page4" style="background: linear-gradient(180deg, #0A0E27 0%, #1A1E3A 100%);">
+    <div class="data-flow data-flow-2"></div>
+    <div class="data-flow data-flow-3"></div>
+
+    <div class="neon-particle" style="width:3px;height:3px;background:#FF0080;box-shadow:0 0 6px #FF0080;top:12%;right:15%;animation:twinkle 4.2s ease-in-out infinite;"></div>
+    <div class="neon-particle" style="width:4px;height:4px;background:#00F5FF;box-shadow:0 0 8px #00F5FF;top:45%;left:8%;animation:twinkle3 3.2s ease-in-out infinite;"></div>
+    <div class="neon-particle" style="width:3px;height:3px;background:#7B2FFF;box-shadow:0 0 6px #7B2FFF;bottom:25%;right:10%;animation:twinkle2 3.8s ease-in-out infinite;"></div>
+
+    <div class="page-content-page">
+      <div class="animate-in section-title neon-title" data-delay="0.1">&gt;&gt; 入住须知</div>
+      <div class="animate-in eng-label" data-delay="0.15">CHECK_IN</div>
+      <img src="assets/checkin.jpg" class="anim-scale seg-img section-img" alt="入住" data-delay="0.2">
+      <div class="anim-card glass-card glass-card-highlight" data-delay="0.35">
+        <div class="info-row animate-in" data-delay="0.45">
+          <span class="info-label">[TIME]</span>
+          <span class="info-value">7月20日 8:30-17:00</span>
+        </div>
+        <div class="info-row animate-in" data-delay="0.55">
+          <span class="info-label">[LOC]</span>
+          <span class="info-value highlight">员工宿舍管理办公室</span>
+        </div>
+        <div class="info-row animate-in" data-delay="0.65">
+          <span class="info-label">[TEL]</span>
+          <span class="info-value">报到当天群内通知</span>
+        </div>
+        <div class="info-row animate-in" data-delay="0.75">
+          <span class="info-label">[NEED]</span>
+          <span class="info-value">身份证、录取通知书</span>
+        </div>
+        <div class="info-row animate-in" data-delay="0.85">
+          <span class="info-label">[MAIL]</span>
+          <span class="info-value" style="font-size:12.5px;line-height:1.5;">
+            广西柳州市鱼峰区<br>
+            {品牌}宿舍管理办<br>
+            收件人：宿管办 X老师<br>
+            电话：详见群通知
+          </span>
+        </div>
+        <div class="glass-card-warn">
+          <strong>// NOTICE</strong><br>
+          行李请贴好姓名标签，注明"新员工行李"。贵重物品请随身携带，不要邮寄。建议快递寄出后截图单号留存。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== PAGE 5: Welcome Gifts ==================== -->
+  <div class="page page-5 circuit-line" id="page5" style="background: linear-gradient(180deg, #0A0E27 0%, #1A1E3A 100%);">
+    <div class="data-flow data-flow-1"></div>
+    <div class="data-flow data-flow-2"></div>
+
+    <div class="neon-particle" style="width:4px;height:4px;background:#7B2FFF;box-shadow:0 0 8px #7B2FFF;top:8%;left:10%;animation:twinkle 3.5s ease-in-out infinite;"></div>
+    <div class="neon-particle" style="width:3px;height:3px;background:#00F5FF;box-shadow:0 0 6px #00F5FF;top:30%;right:12%;animation:twinkle2 4s ease-in-out infinite;"></div>
+    <div class="neon-particle" style="width:5px;height:5px;background:#FF0080;box-shadow:0 0 10px #FF0080;bottom:20%;left:15%;animation:twinkle3 3s ease-in-out infinite;"></div>
+
+    <div class="page-content-page">
+      <div class="animate-in section-title neon-title-purple" data-delay="0.1">&gt;&gt; 入职大礼包</div>
+      <div class="animate-in eng-label" data-delay="0.15">WELCOME_KIT</div>
+      <img src="assets/gifts.jpg" class="anim-scale seg-img section-img" alt="大礼包" data-delay="0.2" style="max-width:260px;">
+      <div class="gift-grid">
+        <div class="anim-card gift-card" data-delay="0.35">
+          <div class="gift-icon">&#x1F4B0;</div>
+          <div class="gift-name">安家费</div>
+          <div class="gift-amount"><span class="counter" data-target="4000">0</span><span class="gift-unit"> 元</span></div>
+          <div class="gift-desc">本科4000元<br>硕士<span class="counter" data-target="5000">0</span>元</div>
+        </div>
+        <div class="anim-card gift-card purple" data-delay="0.45">
+          <div class="gift-icon">&#x1F392;</div>
+          <div class="gift-name">行李托运补贴</div>
+          <div class="gift-amount"><span class="counter" data-target="100">0</span><span class="gift-unit"> 元</span></div>
+        </div>
+        <div class="anim-card gift-card" data-delay="0.55">
+          <div class="gift-icon">&#x1F68C;</div>
+          <div class="gift-name">交通费用补贴</div>
+          <div class="gift-amount"><span class="counter" data-target="400">0</span><span class="gift-unit"> 元</span></div>
+        </div>
+        <div class="anim-card gift-card purple" data-delay="0.65">
+          <div class="gift-icon">&#x1F455;</div>
+          <div class="gift-name">实物礼包</div>
+          <div class="gift-amount" style="font-size:15px;font-weight:600;">惊喜好礼</div>
+          <div class="gift-desc">劳保用品 + 文化衫<br>+ 伴手礼</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== PAGE 6: Deadline Reminder ==================== -->
+  <div class="page page-6 circuit-line" id="page6" style="background: linear-gradient(180deg, #0A0E27 0%, #1A1E3A 100%);">
+    <div class="data-flow data-flow-1"></div>
+    <div class="data-flow data-flow-3"></div>
+
+    <div class="neon-particle" style="width:4px;height:4px;background:#FF0080;box-shadow:0 0 8px #FF0080;top:10%;left:10%;animation:twinkle 3s ease-in-out infinite;"></div>
+    <div class="neon-particle" style="width:3px;height:3px;background:#FF0080;box-shadow:0 0 6px #FF0080;top:35%;right:15%;animation:twinkle2 2.8s ease-in-out infinite;"></div>
+    <div class="neon-particle" style="width:4px;height:4px;background:#FF0080;box-shadow:0 0 8px #FF0080;bottom:25%;left:20%;animation:twinkle3 3.5s ease-in-out infinite;"></div>
+
+    <div class="page-content-page">
+      <div class="animate-in section-title neon-title" data-delay="0.1">&gt;&gt; 材料提交截止提醒</div>
+      <div class="animate-in eng-label" data-delay="0.15">DEADLINE_ALERT</div>
+      <img src="assets/deadline.jpg" class="anim-scale seg-img section-img" alt="截止提醒" data-delay="0.2" style="max-width:260px;">
+      <div class="anim-card glass-card deadline-card" data-delay="0.35">
+        <div class="animate-in text-center" data-delay="0.45" style="margin-bottom:6px;">
+          <span style="font-size:14px;color:rgba(255,255,255,0.5);">请务必在以下时间前完成材料提交</span>
+        </div>
+        <div class="animate-in text-center deadline-date pulse-text" data-delay="0.55">
+          7月3日前
+        </div>
+        <div class="step-list">
+          <div class="step-item anim-slide-left" data-delay="0.65">
+            <div class="step-num">1</div>
+            <div class="step-text">整理全部证件电子扫描件（PDF格式，每项单独文件）</div>
+          </div>
+          <div class="step-item anim-slide-left" data-delay="0.75">
+            <div class="step-num">2</div>
+            <div class="step-text">将所有材料压缩打包，命名为"姓名+学校+专业"</div>
+          </div>
+          <div class="step-item anim-slide-left" data-delay="0.85">
+            <div class="step-num">3</div>
+            <div class="step-text">发送至以下邮箱，邮件主题同压缩包名称</div>
+          </div>
+        </div>
+        <div class="email-block animate-in" data-delay="0.95">
+          <div class="email-label">// SUBMIT EMAIL</div>
+          <div class="email-addr">hr@xxxxx.com</div>
+        </div>
+        <div class="glass-card-warn" style="margin-top:14px;">
+          <strong>// ALERT</strong><br>
+          逾期未提交将影响入职手续办理，请务必按时完成！如有特殊情况请联系HR说明。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== PAGE 7: Ending ==================== -->
+  <div class="page page-7" id="page7">
+    <!-- Neon particles -->
+    <div class="neon-particle" style="width:4px;height:4px;background:#00F5FF;box-shadow:0 0 8px #00F5FF;top:10%;left:10%;animation:twinkle 3s ease-in-out infinite;z-index:1;"></div>
+    <div class="neon-particle" style="width:3px;height:3px;background:#7B2FFF;box-shadow:0 0 6px #7B2FFF;top:15%;right:15%;animation:twinkle2 4s ease-in-out infinite;z-index:1;"></div>
+    <div class="neon-particle" style="width:5px;height:5px;background:#FF0080;box-shadow:0 0 10px #FF0080;bottom:15%;left:20%;animation:twinkle3 3.5s ease-in-out infinite;z-index:1;"></div>
+    <div class="neon-particle" style="width:4px;height:4px;background:#00F5FF;box-shadow:0 0 8px #00F5FF;top:50%;right:8%;animation:twinkle 4.2s ease-in-out infinite;z-index:1;"></div>
+    <div class="neon-particle" style="width:3px;height:3px;background:#7B2FFF;box-shadow:0 0 6px #7B2FFF;bottom:40%;left:35%;animation:twinkle2 3s ease-in-out infinite;z-index:1;"></div>
+
+    <div class="end-content">
+      <div class="animate-in end-title" data-delay="0.2">
+        <span style="color:#00F5FF;text-shadow:0 0 10px rgba(0,245,255,0.5),0 0 20px rgba(0,245,255,0.2);">盛夏七月</span><br>
+        <span style="color:#7B2FFF;text-shadow:0 0 10px rgba(123,47,255,0.5),0 0 20px rgba(123,47,255,0.2);">我们在{品牌}等你！</span>
+      </div>
+      <div class="animate-in end-divider" data-delay="0.4"></div>
+      <div class="animate-in end-company" data-delay="0.5">
+        {公司1}<br>
+        {公司2}
+      </div>
+      <div class="animate-in end-date" data-delay="0.7">二〇二六年六月二十九日</div>
+
+      <div class="qr-area animate-in" data-delay="0.8">
+        <div class="qr-card">
+          <div class="qr-label">扫码填写报到回执 / 扫码加入新员工群</div>
+          <div class="qr-box">
+            <span class="qr-placeholder">QR CODE<br>PLACEHOLDER</span>
+          </div>
+          <div class="qr-link">附件下载链接：__________</div>
+          <div class="qr-link" style="margin-top:4px;">联系电话：__________</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Page Indicator -->
+<div class="page-indicator" id="pageIndicator">
+  <span class="dot active"></span>
+  <span class="dot"></span>
+  <span class="dot"></span>
+  <span class="dot"></span>
+  <span class="dot"></span>
+  <span class="dot"></span>
+  <span class="dot"></span>
+</div>
+
+<script>
+(function() {
+  'use strict';
+
+  /* ========== Page Navigation ========== */
+  var pages = document.querySelectorAll('.page');
+  var dots = document.querySelectorAll('.page-indicator .dot');
+  var totalPages = pages.length;
+  var currentPage = 0;
+  var isAnimating = false;
+  var ANIM_DURATION = 620;
+
+  function goToPage(index) {
+    if (isAnimating || index < 0 || index >= totalPages || index === currentPage) return;
+    isAnimating = true;
+
+    for (var i = 0; i < totalPages; i++) {
+      pages[i].classList.remove('active', 'prev');
+    }
+
+    if (index > currentPage) {
+      pages[currentPage].classList.add('prev');
+    }
+
+    currentPage = index;
+    pages[currentPage].classList.add('active');
+
+    updateIndicator();
+    triggerAnimations(currentPage);
+
+    if (currentPage === 4) {
+      triggerNumberAnimation();
+    }
+
+    setTimeout(function() { isAnimating = false; }, ANIM_DURATION);
+  }
+
+  function updateIndicator() {
+    for (var i = 0; i < dots.length; i++) {
+      dots[i].classList.toggle('active', i === currentPage);
+    }
+  }
+
+  /* ========== Touch Events ========== */
+  var touchStartY = 0;
+  var touchStartTime = 0;
+
+  document.addEventListener('touchstart', function(e) {
+    touchStartY = e.touches[0].clientY;
+    touchStartTime = Date.now();
+  }, { passive: true });
+
+  document.addEventListener('touchend', function(e) {
+    var touchEndY = e.changedTouches[0].clientY;
+    var diff = touchStartY - touchEndY;
+    var elapsed = Date.now() - touchStartTime;
+
+    if (Math.abs(diff) > 50 && elapsed < 500) {
+      if (diff > 0) goToPage(currentPage + 1);
+      else goToPage(currentPage - 1);
+    }
+  }, { passive: true });
+
+  /* ========== Wheel Events ========== */
+  var wheelTimeout = null;
+  document.addEventListener('wheel', function(e) {
+    e.preventDefault();
+    if (wheelTimeout) return;
+    wheelTimeout = setTimeout(function() { wheelTimeout = null; }, 800);
+
+    if (e.deltaY > 0) goToPage(currentPage + 1);
+    else if (e.deltaY < 0) goToPage(currentPage - 1);
+  }, { passive: false });
+
+  /* ========== Keyboard ========== */
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+      goToPage(currentPage + 1);
+    } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+      goToPage(currentPage - 1);
+    }
+  });
+
+  /* ========== Entrance Animations ========== */
+  function triggerAnimations(pageIndex) {
+    var page = pages[pageIndex];
+    var animElements = page.querySelectorAll('.animate-in, .anim-scale, .anim-card, .anim-slide-left');
+
+    animElements.forEach(function(el) {
+      var delay = parseFloat(el.getAttribute('data-delay')) || 0;
+      el.style.transitionDelay = delay + 's';
+    });
+
+    void page.offsetHeight;
+  }
+
+  /* ========== Number Counter Animation ========== */
+  var numbersAnimated = false;
+
+  function animateNumber(element, target, duration) {
+    duration = duration || 1000;
+    var startTime = performance.now();
+
+    function update(currentTime) {
+      var elapsed = currentTime - startTime;
+      var progress = Math.min(elapsed / duration, 1);
+      var eased = 1 - Math.pow(1 - progress, 3);
+      var current = Math.round(eased * target);
+      element.textContent = current;
+      if (progress < 1) {
+        requestAnimationFrame(update);
+      }
+    }
+    requestAnimationFrame(update);
+  }
+
+  function triggerNumberAnimation() {
+    if (numbersAnimated) return;
+    numbersAnimated = true;
+
+    var counters = document.querySelectorAll('.counter');
+    counters.forEach(function(counter) {
+      var target = parseInt(counter.getAttribute('data-target'), 10);
+      if (!isNaN(target)) {
+        animateNumber(counter, target, 1000);
+      }
+    });
+  }
+
+  /* ========== Init ========== */
+  triggerAnimations(0);
+
+})();
+</script>
+
+</body>
+</html>
