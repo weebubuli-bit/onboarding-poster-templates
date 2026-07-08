@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>入职指南海报模板库</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: linear-gradient(135deg, #0D1B2A 0%, #1B3A4B 50%, #0D1B2A 100%);
+  min-height: 100vh;
+  color: #E0E8F0;
+  padding: 20px;
+}
+.header {
+  text-align: center;
+  padding: 40px 0 30px;
+}
+.header h1 {
+  font-size: 22px;
+  background: linear-gradient(90deg, #00BCD4, #4FC3F7, #81D4FA);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 8px;
+}
+.header p {
+  font-size: 13px;
+  color: #7B8FA3;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+.card {
+  border-radius: 16px;
+  padding: 22px 14px;
+  text-align: center;
+  text-decoration: none;
+  color: #E0E8F0;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.card:active { transform: scale(0.97); }
+.card .icon { font-size: 32px; margin-bottom: 10px; display: block; }
+.card h3 { font-size: 15px; margin-bottom: 5px; color: #fff; }
+.card p { font-size: 11px; color: #7B8FA3; line-height: 1.5; }
+.card.youth { background: rgba(255,107,107,0.08); border-color: rgba(255,107,107,0.25); }
+.card.youth .icon { color: #FF6B6B; }
+.card.business { background: rgba(52,152,219,0.08); border-color: rgba(52,152,219,0.25); }
+.card.business .icon { color: #3498DB; }
+.card.tech { background: rgba(0,245,255,0.08); border-color: rgba(0,245,255,0.25); }
+.card.tech .icon { color: #00F5FF; }
+.card.art { background: rgba(170,150,218,0.08); border-color: rgba(170,150,218,0.25); }
+.card.art .icon { color: #AA96DA; }
+.footer {
+  text-align: center;
+  margin-top: 30px;
+  padding: 20px 0;
+  font-size: 11px;
+  color: #4A5A6A;
+}
+.badge {
+  display: inline-block;
+  font-size: 9px;
+  background: rgba(255,255,255,0.08);
+  padding: 2px 8px;
+  border-radius: 10px;
+  color: #7B8FA3;
+  margin-top: 6px;
+}
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>入职指南海报模板</h1>
+  <p>2026届管培生报到全攻略 · 选择风格查看</p>
+</div>
+<div class="grid">
+  <a class="card youth" href="青春活力风/poster_h5.html">
+    <span class="icon">&#x1F31F;</span>
+    <h3>青春活力风</h3>
+    <p>珊瑚橙+薄荷绿<br>活泼明快</p>
+    <span class="badge">H5翻页 · 7页</span>
+  </a>
+  <a class="card business" href="商务简约风/poster_h5.html">
+    <span class="icon">&#x1F4BC;</span>
+    <h3>商务简约风</h3>
+    <p>深蓝灰+商务蓝<br>干净专业</p>
+    <span class="badge">H5翻页 · 7页</span>
+  </a>
+  <a class="card tech" href="科技未来风/poster_h5.html">
+    <span class="icon">&#x1F4A1;</span>
+    <h3>科技未来风</h3>
+    <p>霓虹青+电紫<br>赛博科技</p>
+    <span class="badge">H5翻页 · 7页</span>
+  </a>
+  <a class="card art" href="文艺清新风/poster_h5.html">
+    <span class="icon">&#x1F338;</span>
+    <h3>文艺清新风</h3>
+    <p>雾蓝+薰衣草<br>水彩手绘</p>
+    <span class="badge">H5翻页 · 7页</span>
+  </a>
+</div>
+<div class="footer">
+  点击卡片进入H5翻页版 · 手机上下滑动翻页<br>
+  所有模板已脱敏，公司名和联系方式均为占位符
+</div>
+</body>
+</html>
