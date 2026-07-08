@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>2026届管理培训生入职报到指南</title>
+<style>
+/* ========== Reset & Base ========== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html, body {
+  width: 100%; height: 100%;
+  overflow: hidden;
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-font-smoothing: antialiased;
+  background: #FDFCF8;
+}
+
+/* ========== Container ========== */
+.h5-container {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  position: fixed;
+  top: 0; left: 0;
+  background: #FDFCF8;
+}
+.h5-inner {
+  max-width: 420px;
+  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ========== Pages ========== */
+.page {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100vh;
+  opacity: 0;
+  transform: translateY(100%);
+  transition: all 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  pointer-events: none;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  -webkit-overflow-scrolling: touch;
+  background: #FDFCF8;
+}
+.page::-webkit-scrollbar { display: none; }
+.page.active {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+  z-index: 2;
+}
+.page.leaving {
+  opacity: 0;
+  transform: translateY(-100%);
+  z-index: 1;
+}
+
+/* ========== Paper Texture ========== */
+.page::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 3px,
+      rgba(170,150,218,0.015) 3px,
+      rgba(170,150,218,0.015) 4px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 5px,
+      rgba(168,216,234,0.01) 5px,
+      rgba(168,216,234,0.01) 6px
+    );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ========== Page Indicators ========== */
+.page-indicators {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 100;
+  padding: 6px 12px;
+  background: rgba(253,252,248,0.7);
+  border-radius: 20px;
+}
+.page-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(170,150,218,0.25);
+  transition: all 0.5s ease;
+  cursor: pointer;
+}
+.page-dot.active {
+  width: 24px;
+  border-radius: 4px;
+  background: #AA96DA;
+}
+
+/* ========== Page Content ========== */
+.page-content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  padding: 0 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ========== Typography ========== */
+.serif {
+  font-family: "Songti SC", "SimSun", "Noto Serif SC", serif;
+}
+.title-main {
+  font-family: "Songti SC", "SimSun", "Noto Serif SC", serif;
+  font-weight: 600;
+  font-size: 22px;
+  color: #7B68AE;
+  text-align: center;
+  letter-spacing: 2px;
+}
+
+/* ========== Decorations ========== */
+/* Watercolor blob */
+.watercolor-blob {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
+.watercolor-blob.blue {
+  background: radial-gradient(ellipse at center, rgba(168,216,234,0.3) 0%, transparent 70%);
+}
+.watercolor-blob.pink {
+  background: radial-gradient(ellipse at center, rgba(252,186,211,0.3) 0%, transparent 70%);
+}
+.watercolor-blob.purple {
+  background: radial-gradient(ellipse at center, rgba(170,150,218,0.25) 0%, transparent 70%);
+}
+.watercolor-blob.mix1 {
+  background: radial-gradient(ellipse at 30% 40%, rgba(168,216,234,0.25) 0%, transparent 50%),
+              radial-gradient(ellipse at 70% 60%, rgba(252,186,211,0.2) 0%, transparent 50%);
+}
+
+/* Leaf shape */
+.leaf {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: rgba(160,200,160,0.25);
+  border-radius: 0 50% 50% 50%;
+  transform: rotate(45deg);
+  pointer-events: none;
+  z-index: 0;
+}
+.leaf.lg { width: 28px; height: 28px; }
+.leaf.sm { width: 14px; height: 14px; }
+.leaf.rotate120 { transform: rotate(120deg); }
+.leaf.rotate200 { transform: rotate(200deg); }
+.leaf.rotate300 { transform: rotate(300deg); }
+
+/* Tape / sticker element */
+.tape {
+  position: absolute;
+  width: 60px;
+  height: 18px;
+  background: rgba(252,186,211,0.35);
+  transform: rotate(-3deg);
+  border-radius: 2px;
+  pointer-events: none;
+  z-index: 1;
+}
+.tape.blue { background: rgba(168,216,234,0.35); }
+.tape.purple { background: rgba(170,150,218,0.3); }
+
+/* Gradient color band */
+.color-band {
+  width: 80px;
+  height: 2px;
+  border-radius: 1px;
+  background: linear-gradient(90deg, #A8D8EA, #FCBAD3, #AA96DA);
+  margin: 12px auto 20px;
+}
+
+/* Left accent border */
+.left-accent {
+  border-left: 3px solid #FCBAD3;
+  padding-left: 14px;
+}
+
+/* ========== Card ========== */
+.card {
+  width: 100%;
+  border: 1px dashed rgba(170,150,218,0.3);
+  border-radius: 12px;
+  padding: 20px 18px;
+  margin-bottom: 16px;
+  background: rgba(253,252,248,0.5);
+  box-shadow: 0 2px 8px rgba(170,150,218,0.06);
+}
+
+/* ========== Info Row ========== */
+.info-row {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 14px;
+  font-size: 14px;
+  color: #4A4A4A;
+  line-height: 1.7;
+}
+.info-row:last-child { margin-bottom: 0; }
+.info-label {
+  flex-shrink: 0;
+  color: #888;
+  min-width: 72px;
+  font-size: 13px;
+}
+.info-value {
+  flex: 1;
+  color: #4A4A4A;
+}
+.info-value strong, .info-value .highlight {
+  color: #7B68AE;
+  font-weight: 600;
+}
+
+/* ========== List Items ========== */
+.doc-list {
+  width: 100%;
+  margin-bottom: 16px;
+}
+.doc-item {
+  display: flex;
+  align-items: flex-start;
+  padding: 8px 0;
+  font-size: 13.5px;
+  color: #4A4A4A;
+  line-height: 1.65;
+  border-bottom: 1px dashed rgba(170,150,218,0.12);
+}
+.doc-item:last-child { border-bottom: none; }
+.doc-bullet {
+  flex-shrink: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-top: 5px;
+  margin-right: 12px;
+}
+.doc-bullet.blue { background: radial-gradient(circle at 40% 40%, rgba(168,216,234,0.6), rgba(168,216,234,0.2)); }
+.doc-bullet.pink { background: radial-gradient(circle at 40% 40%, rgba(252,186,211,0.6), rgba(252,186,211,0.2)); }
+.doc-bullet.purple { background: radial-gradient(circle at 40% 40%, rgba(170,150,218,0.5), rgba(170,150,218,0.2)); }
+.doc-name { font-weight: 500; color: #555; margin-right: 6px; }
+.doc-detail { color: #888; font-size: 12.5px; }
+
+/* ========== Hint Box ========== */
+.hint-box {
+  width: 100%;
+  background: rgba(170,150,218,0.08);
+  border: 1px dashed rgba(170,150,218,0.25);
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 12px;
+  color: #888;
+  line-height: 1.65;
+  margin-top: 4px;
+}
+
+/* ========== Image ========== */
+.page-img {
+  width: 80%;
+  max-width: 300px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(170,150,218,0.06);
+  margin-bottom: 18px;
+  object-fit: cover;
+  opacity: 0;
+  transform: scale(0.95);
+}
+.page-img.anim-scale {
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+/* ========== Gift Grid ========== */
+.gift-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  width: 100%;
+  margin-bottom: 16px;
+}
+.gift-card {
+  border: 1px dashed rgba(170,150,218,0.3);
+  border-radius: 12px;
+  padding: 18px 14px;
+  text-align: center;
+  background: rgba(253,252,248,0.6);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(170,150,218,0.06);
+}
+.gift-card .gift-deco {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0.5;
+}
+.gift-card .gift-deco.top-right {
+  top: 6px; right: 6px;
+  background: radial-gradient(circle, rgba(252,186,211,0.4), transparent 70%);
+}
+.gift-card .gift-deco.bottom-left {
+  bottom: 6px; left: 6px;
+  background: radial-gradient(circle, rgba(168,216,234,0.4), transparent 70%);
+}
+.gift-card .gift-deco.center {
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px; height: 40px;
+  background: radial-gradient(circle, rgba(170,150,218,0.2), transparent 70%);
+}
+.gift-amount {
+  font-family: "Songti SC", "SimSun", "Noto Serif SC", serif;
+  font-size: 24px;
+  font-weight: 600;
+  color: #7B68AE;
+  margin-bottom: 6px;
+}
+.gift-card:nth-child(2) .gift-amount { color: #AA96DA; }
+.gift-card:nth-child(3) .gift-amount { color: #A8D8EA; }
+.gift-card:nth-child(4) .gift-amount { color: #7B68AE; }
+.gift-label {
+  font-size: 12.5px;
+  color: #888;
+  line-height: 1.5;
+}
+
+/* ========== Deadline Date ========== */
+.deadline-date {
+  font-family: "Songti SC", "SimSun", "Noto Serif SC", serif;
+  font-size: 26px;
+  font-weight: 600;
+  color: #7B68AE;
+  text-align: center;
+  margin: 16px 0;
+  animation: pulse-lavender 3s ease-in-out infinite;
+}
+@keyframes pulse-lavender {
+  0%, 100% { text-shadow: 0 0 0 transparent; }
+  50% { text-shadow: 0 0 16px rgba(170,150,218,0.3); }
+}
+
+/* ========== Step List ========== */
+.step-list {
+  width: 100%;
+  margin-bottom: 16px;
+}
+.step-item {
+  display: flex;
+  align-items: flex-start;
+  padding: 8px 0;
+  font-size: 13.5px;
+  color: #4A4A4A;
+  line-height: 1.65;
+}
+.step-bullet {
+  flex-shrink: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-top: 5px;
+  margin-right: 12px;
+}
+
+/* ========== Email Box ========== */
+.email-box {
+  display: inline-block;
+  background: rgba(168,216,234,0.15);
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 14px;
+  color: #7B68AE;
+  letter-spacing: 0.5px;
+  margin: 8px 0 16px;
+}
+
+/* ========== QR Code Area ========== */
+.qr-area {
+  width: 160px;
+  text-align: center;
+  margin-top: 16px;
+}
+.qr-placeholder {
+  width: 140px;
+  height: 140px;
+  border: 1px dashed #AA96DA;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px auto;
+  background: rgba(253,252,248,0.5);
+  font-size: 11px;
+  color: #BBB;
+}
+
+/* ========== Slide Up Hint ========== */
+.slide-hint {
+  position: absolute;
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  animation: hint-bounce 2s ease-in-out infinite;
+}
+.slide-hint-text {
+  font-size: 12px;
+  color: #BBB;
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+@keyframes hint-bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(-6px); }
+}
+
+/* ========== Small Flower Decoration ========== */
+.flower {
+  position: absolute;
+  pointer-events: none;
+  z-index: 1;
+}
+.flower-petal {
+  position: absolute;
+  width: 8px;
+  height: 12px;
+  border-radius: 50%;
+  opacity: 0.5;
+}
+.flower-center {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(252,186,211,0.5);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* ========== Entrance Animation ========== */
+.anim-item {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.anim-item.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+.anim-item.d1 { transition-delay: 0.1s; }
+.anim-item.d2 { transition-delay: 0.2s; }
+.anim-item.d3 { transition-delay: 0.3s; }
+.anim-item.d4 { transition-delay: 0.4s; }
+.anim-item.d5 { transition-delay: 0.5s; }
+
+/* ========== Page 1 Specific ========== */
+.page-cover {
+  position: relative;
+  justify-content: flex-end;
+  overflow: hidden;
+}
+.page-cover .cover-bg {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 100%;
+  z-index: 0;
+}
+.page-cover .cover-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.7;
+  filter: blur(1px);
+}
+.page-cover .cover-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(253,252,248,0.1) 0%, rgba(253,252,248,0.6) 40%, #FDFCF8 100%);
+  z-index: 1;
+}
+.page-cover .cover-content {
+  position: relative;
+  z-index: 2;
+  padding-bottom: 80px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.page-cover .cover-title {
+  font-family: "Songti SC", "SimSun", "Noto Serif SC", serif;
+  font-weight: 600;
+  font-size: 36px;
+  color: #7B68AE;
+  letter-spacing: 4px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+.page-cover .cover-subtitle {
+  font-family: "Songti SC", "SimSun", "Noto Serif SC", serif;
+  font-size: 24px;
+  color: #AA96DA;
+  letter-spacing: 6px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.page-cover .cover-company {
+  font-family: "Songti SC", "SimSun", "Noto Serif SC", serif;
+  font-size: 14px;
+  color: #999;
+  letter-spacing: 2px;
+  text-align: center;
+}
+.page-cover .cover-divider {
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #AA96DA, transparent);
+  margin: 16px auto;
+}
+
+/* ========== Page 7 Specific ========== */
+.page-ending {
+  position: relative;
+  justify-content: center;
+}
+.page-ending::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 60%;
+  background: linear-gradient(to top, rgba(170,150,218,0.12) 0%, transparent 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+.page-ending .ending-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 70px;
+}
+.ending-greeting {
+  font-family: "Songti SC", "SimSun", "Noto Serif SC", serif;
+  font-size: 26px;
+  font-weight: 600;
+  color: #7B68AE;
+  letter-spacing: 3px;
+  margin-bottom: 8px;
+}
+.ending-invite {
+  font-family: "Songti SC", "SimSun", "Noto Serif SC", serif;
+  font-size: 26px;
+  color: #AA96DA;
+  letter-spacing: 3px;
+  margin-bottom: 20px;
+}
+.ending-info {
+  font-family: "Songti SC", "SimSun", "Noto Serif SC", serif;
+  font-size: 13px;
+  color: #999;
+  letter-spacing: 1px;
+  text-align: center;
+  line-height: 2;
+}
+.ending-color-band {
+  width: 120px;
+  height: 2px;
+  border-radius: 1px;
+  background: linear-gradient(90deg, #A8D8EA, #FCBAD3, #AA96DA);
+  margin: 20px auto;
+}
+</style>
+</head>
+<body>
+
+<div class="h5-container">
+<div class="h5-inner">
+
+<!-- ==================== PAGE 1: COVER ==================== -->
+<div class="page page-cover active" data-page="0">
+  <!-- Watercolor blobs -->
+  <div class="watercolor-blob blue" style="width:120px;height:120px;top:8%;left:-20px;"></div>
+  <div class="watercolor-blob pink" style="width:100px;height:100px;top:5%;right:-15px;"></div>
+  <div class="watercolor-blob purple" style="width:80px;height:80px;top:25%;right:20%;"></div>
+  <!-- Leaves -->
+  <div class="leaf lg rotate120" style="top:12%;left:10%;background:rgba(160,200,160,0.2);"></div>
+  <div class="leaf sm rotate200" style="top:18%;right:12%;background:rgba(160,200,160,0.18);"></div>
+  <div class="leaf rotate300" style="top:8%;left:40%;background:rgba(160,200,160,0.15);"></div>
+
+  <div class="cover-bg">
+    <img src="assets/cover.jpg" alt="cover">
+  </div>
+  <div class="cover-overlay"></div>
+
+  <div class="cover-content">
+    <div class="cover-title anim-item">2026届管理培训生</div>
+    <div class="cover-divider anim-item d1"></div>
+    <div class="cover-subtitle anim-item d2">入职报到指南</div>
+    <div class="cover-company anim-item d3">{公司1} · {公司2}</div>
+
+    <!-- Small flower -->
+    <div class="flower anim-item d4" style="margin-top:30px;">
+      <div style="position:relative;width:24px;height:24px;">
+        <div class="flower-petal" style="background:rgba(252,186,211,0.5);top:-4px;left:8px;transform:rotate(0deg);"></div>
+        <div class="flower-petal" style="background:rgba(170,150,218,0.4);top:4px;left:16px;transform:rotate(72deg);"></div>
+        <div class="flower-petal" style="background:rgba(252,186,211,0.5);top:14px;left:10px;transform:rotate(144deg);"></div>
+        <div class="flower-petal" style="background:rgba(168,216,234,0.5);top:12px;left:0;transform:rotate(216deg);"></div>
+        <div class="flower-petal" style="background:rgba(170,150,218,0.4);top:2px;left:2px;transform:rotate(288deg);"></div>
+        <div class="flower-center"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-hint">
+    <span class="slide-hint-text">向上滑动</span>
+    <svg width="16" height="10" viewBox="0 0 16 10" fill="none"><path d="M8 0L15 7H1L8 0Z" fill="#CCC"/></svg>
+  </div>
+</div>
+
+<!-- ==================== PAGE 2: 所需证件 ==================== -->
+<div class="page" data-page="1">
+  <div class="watercolor-blob blue" style="width:100px;height:100px;top:3%;right:-15px;"></div>
+  <div class="watercolor-blob pink" style="width:70px;height:70px;bottom:15%;left:-10px;"></div>
+  <div class="leaf sm rotate120" style="top:6%;left:6%;"></div>
+
+  <div class="page-content" style="padding-top:40px;">
+    <div class="title-main anim-item">所需证件</div>
+    <div class="color-band anim-item d1"></div>
+
+    <img src="assets/docs.jpg" alt="所需证件" class="page-img anim-scale" style="max-height:160px;">
+
+    <div class="card anim-item d2">
+      <div class="doc-list">
+        <div class="doc-item">
+          <div class="doc-bullet blue"></div>
+          <div>
+            <span class="doc-name">毕业证&学位证</span>
+            <div class="doc-detail">原件 & 复印件 1&2份（含第二学历）</div>
+          </div>
+        </div>
+        <div class="doc-item">
+          <div class="doc-bullet pink"></div>
+          <div>
+            <span class="doc-name">身份证</span>
+            <div class="doc-detail">原件 & 复印件 1&2份</div>
+          </div>
+        </div>
+        <div class="doc-item">
+          <div class="doc-bullet purple"></div>
+          <div>
+            <span class="doc-name">外语证书&成绩单</span>
+            <div class="doc-detail">原件 & 复印件 1&1份</div>
+          </div>
+        </div>
+        <div class="doc-item">
+          <div class="doc-bullet blue"></div>
+          <div>
+            <span class="doc-name">党组织关系介绍信</span>
+            <div class="doc-detail">原件 1份（线上转无需）</div>
+          </div>
+        </div>
+        <div class="doc-item">
+          <div class="doc-bullet pink"></div>
+          <div>
+            <span class="doc-name">入党志愿书</span>
+            <div class="doc-detail">复印件 1份</div>
+          </div>
+        </div>
+        <div class="doc-item">
+          <div class="doc-bullet purple"></div>
+          <div>
+            <span class="doc-name">一寸免冠彩照</span>
+            <div class="doc-detail">电子版 1张</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hint-box anim-item d3">提示：请确保所有复印件清晰可辨，建议提前准备并妥善保管原件。</div>
+  </div>
+</div>
+
+<!-- ==================== PAGE 3: 接站安排 ==================== -->
+<div class="page" data-page="2">
+  <div class="watercolor-blob purple" style="width:90px;height:90px;top:4%;left:-12px;"></div>
+  <div class="watercolor-blob mix1" style="width:110px;height:80px;bottom:20%;right:-10px;"></div>
+  <div class="leaf rotate200" style="top:5%;right:8%;"></div>
+
+  <div class="page-content" style="padding-top:40px;">
+    <div class="title-main anim-item">接站安排</div>
+    <div class="color-band anim-item d1"></div>
+
+    <img src="assets/station.jpg" alt="接站安排" class="page-img anim-scale" style="max-height:160px;">
+
+    <div class="card anim-item d2">
+      <div class="info-row">
+        <span class="info-label">接站时间</span>
+        <span class="info-value"><span class="highlight">7月20日</span>（报到当天）</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">接站地点</span>
+        <span class="info-value">柳州火车站东广场出口处</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">接站标识</span>
+        <span class="info-value"><span class="highlight">{品牌}</span>接站牌</span>
+      </div>
+    </div>
+
+    <div class="hint-box anim-item d3">提示：出站后请留意接站牌，届时将有工作人员引导。如自行到达，请提前告知接站联系人。</div>
+  </div>
+</div>
+
+<!-- ==================== PAGE 4: 入住须知 ==================== -->
+<div class="page" data-page="3">
+  <div class="watercolor-blob pink" style="width:80px;height:80px;top:3%;right:5%;"></div>
+  <div class="watercolor-blob blue" style="width:100px;height:100px;bottom:12%;left:-15px;"></div>
+  <div class="leaf sm rotate300" style="top:7%;left:10%;"></div>
+
+  <div class="page-content" style="padding-top:40px;">
+    <div class="title-main anim-item">入住须知</div>
+    <div class="color-band anim-item d1"></div>
+
+    <img src="assets/checkin.jpg" alt="入住须知" class="page-img anim-scale" style="max-height:160px;">
+
+    <div class="card anim-item d2">
+      <div class="info-row">
+        <span class="info-label">办理时间</span>
+        <span class="info-value"><span class="highlight">7月20日</span> 8:30 - 17:00</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">办理地点</span>
+        <span class="info-value">员工宿舍管理办公室</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">联系电话</span>
+        <span class="info-value">报到当天群内通知</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">需携带</span>
+        <span class="info-value">身份证、录取通知书</span>
+      </div>
+      <div class="info-row" style="flex-direction:column;gap:4px;">
+        <span class="info-label">行李邮寄</span>
+        <span class="info-value left-accent" style="font-size:12.5px;line-height:1.7;">
+          广西柳州市鱼峰区 {品牌}宿舍管理办<br>
+          收件人：宿管办 X老师<br>
+          电话：详见群通知
+        </span>
+      </div>
+    </div>
+
+    <div class="hint-box anim-item d3">提示：建议提前邮寄行李，确保报到当天能顺利入住。如有特殊情况请及时联系宿管办。</div>
+  </div>
+</div>
+
+<!-- ==================== PAGE 5: 入职大礼包 ==================== -->
+<div class="page" data-page="4">
+  <div class="watercolor-blob mix1" style="width:120px;height:120px;top:2%;left:-20px;"></div>
+  <div class="watercolor-blob purple" style="width:70px;height:70px;bottom:18%;right:-10px;"></div>
+  <div class="leaf lg rotate120" style="top:4%;right:8%;"></div>
+  <div class="tape" style="top:10%;left:20%;"></div>
+
+  <div class="page-content" style="padding-top:40px;">
+    <div class="title-main anim-item">入职大礼包</div>
+    <div class="color-band anim-item d1"></div>
+
+    <img src="assets/gifts.jpg" alt="入职大礼包" class="page-img anim-scale" style="max-width:260px;max-height:160px;">
+
+    <div class="gift-grid anim-item d2">
+      <div class="gift-card">
+        <div class="gift-deco top-right"></div>
+        <div class="gift-amount" data-target="4000" data-alt="5000">0</div>
+        <div class="gift-label">安家费<br><span style="font-size:11px;color:#AAA;">元</span></div>
+      </div>
+      <div class="gift-card">
+        <div class="gift-deco bottom-left"></div>
+        <div class="gift-amount" data-target="100">0</div>
+        <div class="gift-label">行李托运补贴<br><span style="font-size:11px;color:#AAA;">元</span></div>
+      </div>
+      <div class="gift-card">
+        <div class="gift-deco center"></div>
+        <div class="gift-amount" data-target="400">0</div>
+        <div class="gift-label">交通费用补贴<br><span style="font-size:11px;color:#AAA;">元</span></div>
+      </div>
+      <div class="gift-card">
+        <div class="gift-deco top-right" style="background:radial-gradient(circle, rgba(168,216,234,0.4), transparent 70%);"></div>
+        <div class="gift-amount" style="font-size:18px;">惊喜好礼</div>
+        <div class="gift-label">实物礼包<br><span style="font-size:11px;color:#AAA;">等你来拆</span></div>
+      </div>
+    </div>
+
+    <div class="hint-box anim-item d3">提示：安家费及各项补贴将在入职后按公司流程发放，具体事宜可咨询HR。</div>
+  </div>
+</div>
+
+<!-- ==================== PAGE 6: 材料提交截止提醒 ==================== -->
+<div class="page" data-page="5">
+  <div class="watercolor-blob blue" style="width:90px;height:90px;top:3%;left:-10px;"></div>
+  <div class="watercolor-blob pink" style="width:80px;height:80px;bottom:25%;right:-12px;"></div>
+  <div class="leaf sm rotate200" style="top:6%;right:10%;"></div>
+  <div class="tape blue" style="top:8%;right:15%;transform:rotate(5deg);"></div>
+
+  <div class="page-content" style="padding-top:40px;">
+    <div class="title-main anim-item">材料提交截止提醒</div>
+    <div class="color-band anim-item d1"></div>
+
+    <img src="assets/deadline.jpg" alt="材料提交截止提醒" class="page-img anim-scale" style="max-width:260px;max-height:150px;">
+
+    <div class="card anim-item d2" style="text-align:center;padding:24px 18px;">
+      <div class="deadline-date">7月3日前</div>
+      <div style="font-size:12px;color:#AAA;margin-bottom:16px;">请务必在截止日期前完成提交</div>
+    </div>
+
+    <div class="card anim-item d3" style="padding:16px 18px;">
+      <div class="step-list">
+        <div class="step-item">
+          <div class="doc-bullet blue"></div>
+          <span>整理所需全部证件及复印件</span>
+        </div>
+        <div class="step-item">
+          <div class="doc-bullet pink"></div>
+          <span>按要求扫描或拍摄清晰电子版</span>
+        </div>
+        <div class="step-item">
+          <div class="doc-bullet purple"></div>
+          <span>通过邮件发送至以下邮箱</span>
+        </div>
+      </div>
+      <div style="text-align:center;">
+        <div class="email-box">hr@xxxxx.com</div>
+      </div>
+    </div>
+
+    <div class="hint-box anim-item d4" style="border-color:rgba(252,186,211,0.3);background:rgba(252,186,211,0.06);">
+      <strong style="color:#AA96DA;">特别提醒：</strong>逾期未提交可能影响入职办理进度，如有困难请提前联系HR说明情况。
+    </div>
+  </div>
+</div>
+
+<!-- ==================== PAGE 7: 尾页 ==================== -->
+<div class="page page-ending" data-page="6">
+  <div class="watercolor-blob blue" style="width:100px;height:100px;top:10%;left:-20px;"></div>
+  <div class="watercolor-blob pink" style="width:80px;height:80px;top:15%;right:-15px;"></div>
+  <div class="watercolor-blob purple" style="width:60px;height:60px;bottom:30%;left:15%;"></div>
+  <div class="leaf lg rotate120" style="top:12%;left:8%;background:rgba(160,200,160,0.18);"></div>
+  <div class="leaf rotate300" style="top:20%;right:10%;"></div>
+
+  <div class="ending-content page-content">
+    <div class="ending-greeting anim-item">盛夏七月</div>
+    <div class="ending-invite anim-item d1">我们在{品牌}等你！</div>
+    <div class="ending-color-band anim-item d2"></div>
+
+    <div class="ending-info anim-item d3">
+      {品牌}<br>
+      2026年7月
+    </div>
+
+    <div class="qr-area anim-item d4">
+      <div style="font-size:12px;color:#888;line-height:1.6;margin-top:20px;">
+        扫码填写报到回执 / 扫码加入新员工群
+      </div>
+      <div class="qr-placeholder">
+        <span>二维码预留</span>
+      </div>
+      <div style="font-size:11px;color:#999;line-height:2;margin-top:6px;">
+        附件下载链接：__________<br>
+        联系电话：__________
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== Page Indicators ==================== -->
+<div class="page-indicators">
+  <div class="page-dot active" data-dot="0"></div>
+  <div class="page-dot" data-dot="1"></div>
+  <div class="page-dot" data-dot="2"></div>
+  <div class="page-dot" data-dot="3"></div>
+  <div class="page-dot" data-dot="4"></div>
+  <div class="page-dot" data-dot="5"></div>
+  <div class="page-dot" data-dot="6"></div>
+</div>
+
+</div><!-- /.h5-inner -->
+</div><!-- /.h5-container -->
+
+<script>
+(function() {
+  'use strict';
+
+  /* ========== State ========== */
+  let currentPage = 0;
+  const totalPages = 7;
+  let isAnimating = false;
+  const ANIM_DURATION = 750;
+  const LOCK_DURATION = 750;
+
+  const pages = document.querySelectorAll('.page');
+  const dots = document.querySelectorAll('.page-dot');
+
+  /* ========== Go To Page ========== */
+  function goToPage(index) {
+    if (isAnimating || index < 0 || index >= totalPages || index === currentPage) return;
+    isAnimating = true;
+
+    const direction = index > currentPage ? 1 : -1;
+    const oldPage = pages[currentPage];
+    const newPage = pages[index];
+
+    // Remove leaving from all first
+    pages.forEach(p => p.classList.remove('leaving'));
+
+    // Set new page initial position
+    newPage.style.transition = 'none';
+    newPage.style.transform = direction === 1 ? 'translateY(100%)' : 'translateY(-100%)';
+    newPage.style.opacity = '0';
+    newPage.classList.remove('active', 'leaving');
+
+    // Force reflow
+    void newPage.offsetHeight;
+
+    // Animate
+    newPage.style.transition = '';
+    oldPage.style.transition = '';
+
+    newPage.classList.add('active');
+    newPage.style.transform = 'translateY(0)';
+    newPage.style.opacity = '1';
+
+    oldPage.classList.add('leaving');
+    oldPage.style.transform = direction === 1 ? 'translateY(-100%)' : 'translateY(100%)';
+    oldPage.style.opacity = '0';
+
+    // Update dots
+    dots.forEach((d, i) => {
+      d.classList.toggle('active', i === index);
+    });
+
+    currentPage = index;
+
+    // Trigger entrance animations
+    triggerEntrance(newPage);
+
+    // Trigger count animation on page 5
+    if (currentPage === 4) {
+      triggerCountUp(newPage);
+    }
+
+    setTimeout(() => {
+      isAnimating = false;
+      oldPage.classList.remove('active', 'leaving');
+      oldPage.style.transform = '';
+      oldPage.style.opacity = '';
+      oldPage.style.transition = '';
+    }, LOCK_DURATION);
+  }
+
+  function nextPage() {
+    if (currentPage < totalPages - 1) goToPage(currentPage + 1);
+  }
+
+  function prevPage() {
+    if (currentPage > 0) goToPage(currentPage - 1);
+  }
+
+  /* ========== Entrance Animation ========== */
+  function triggerEntrance(pageEl) {
+    const items = pageEl.querySelectorAll('.anim-item');
+    items.forEach(item => item.classList.remove('show'));
+    // Trigger images
+    const imgs = pageEl.querySelectorAll('.page-img');
+    imgs.forEach(img => img.classList.remove('anim-scale'));
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        items.forEach(item => item.classList.add('show'));
+        imgs.forEach(img => img.classList.add('anim-scale'));
+      });
+    });
+  }
+
+  /* ========== Count-Up Animation ========== */
+  function triggerCountUp(pageEl) {
+    const amounts = pageEl.querySelectorAll('.gift-amount[data-target]');
+    amounts.forEach(el => {
+      const target = parseInt(el.getAttribute('data-target'));
+      const alt = el.getAttribute('data-alt');
+      const duration = 1500;
+      const startTime = performance.now();
+
+      function update(now) {
+        const elapsed = now - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        // Ease out quad
+        const eased = 1 - (1 - progress) * (1 - progress);
+        const current = Math.round(eased * target);
+        el.textContent = current;
+
+        if (progress < 1) {
+          requestAnimationFrame(update);
+        } else {
+          // Show target (or target/alt)
+          el.textContent = alt ? target + '/' + alt : target;
+        }
+      }
+      requestAnimationFrame(update);
+    });
+  }
+
+  /* ========== Touch Events ========== */
+  let touchStartY = 0;
+  let touchStartTime = 0;
+
+  document.addEventListener('touchstart', function(e) {
+    touchStartY = e.touches[0].clientY;
+    touchStartTime = Date.now();
+  }, { passive: true });
+
+  document.addEventListener('touchend', function(e) {
+    const touchEndY = e.changedTouches[0].clientY;
+    const diff = touchStartY - touchEndY;
+    const elapsed = Date.now() - touchStartTime;
+
+    if (elapsed < 500 && Math.abs(diff) > 50) {
+      if (diff > 0) {
+        nextPage();
+      } else {
+        prevPage();
+      }
+    }
+  }, { passive: true });
+
+  /* ========== Mouse Wheel ========== */
+  let wheelTimeout = null;
+
+  document.addEventListener('wheel', function(e) {
+    e.preventDefault();
+    if (wheelTimeout) return;
+
+    wheelTimeout = setTimeout(() => {
+      wheelTimeout = null;
+    }, 800);
+
+    if (e.deltaY > 0) {
+      nextPage();
+    } else {
+      prevPage();
+    }
+  }, { passive: false });
+
+  /* ========== Keyboard ========== */
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+      e.preventDefault();
+      nextPage();
+    } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft' || e.key === 'PageUp') {
+      e.preventDefault();
+      prevPage();
+    }
+  });
+
+  /* ========== Dot Click ========== */
+  dots.forEach(dot => {
+    dot.addEventListener('click', function() {
+      const target = parseInt(this.getAttribute('data-dot'));
+      goToPage(target);
+    });
+  });
+
+  /* ========== Initial Animation ========== */
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      triggerEntrance(pages[0]);
+    });
+  });
+
+})();
+</script>
+</body>
+</html>
